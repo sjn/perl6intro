@@ -1,13 +1,27 @@
 # vim: noexpandtab
 SOURCES = $(wildcard *.adoc)
-TARGETS = $(patsubst %.adoc,%.pdf,$(SOURCES))
+HTML-TARGETS = $(patsubst %.adoc,%.html,$(SOURCES))
+PDF-TARGETS = $(patsubst %.adoc,%.pdf,$(SOURCES))
 
-all: $(TARGETS)
+all: html pdf
 
-$(TARGETS): $(SOURCES)
+html: $(HTML-TARGETS)
+
+pdf: $(PDF-TARGETS)
+
+$(HTML-TARGETS): $(SOURCES)
+	asciidoctor ${@:.html=.adoc}
+
+$(PDF-TARGETS): $(SOURCES)
 	asciidoctor-pdf ${@:.pdf=.adoc}
 
 clean:
-	rm -f $(TARGETS)
+	rm -f $(HTML-TARGETS) $(PDF-TARGETS)
+
+asciidoctor:
+	sudo apt install asciidoctor ruby-pygments.rb
+
+asciidoctor-pdf:
+	sudo gem install asciidoctor-pdf
 
 .PHONY: clean
