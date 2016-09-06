@@ -11,11 +11,13 @@
 :pygments-linenums-mode: table
 :toc: left
 :doctype: book
+:lang: en
+
 
 This document is intended to give you a quick overview of the Perl 6 programming language.
 For those who are new to Perl 6 it should get you up and running.
 
-Some sections of this document reference other (more complete and accurate) parts of the Perl 6 documentation.
+Some sections of this document refer to other (more complete and accurate) parts of the http://docs.perl6.org[Perl 6 documentation].
 You should read them if you need more information on a specific subject.
 
 Throughout this document, you will find examples for most discussed topics.
@@ -25,21 +27,25 @@ To better understand them, take the time to reproduce all examples.
 This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.
 To view a copy of this license, visit
 
-* http://creativecommons.org/licenses/by-sa/4.0/.
+* https://creativecommons.org/licenses/by-sa/4.0/.
 
 .Contribution
 If you would like to contribute to this document head over to:
 
-* http://github.com/hankache/perl6intro
+* https://github.com/hankache/perl6intro
 
 .Feedback
 All feedback is welcomed:
 naoum@hankache.com
 
+If you liked this work, _Star_ the repository on
+link:https://github.com/hankache/perl6intro[Github].
+
 .Translations
 * French: http://fr.perl6intro.com
 * German: http://de.perl6intro.com
 * Japanese: http://ja.perl6intro.com
+* Portuguese: http://pt.perl6intro.com
 * Spanish: http://es.perl6intro.com
 
 :sectnums:
@@ -264,6 +270,8 @@ say "Hello $name";   # Hello John Doe
 -----------------------------------
 
 == Operators
+
+=== Common Operators
 The below table lists the most commonly used operators.
 [cols="^.^5m,^.^5m,.^20,.^20m,.^20m", options="header"]
 |===
@@ -380,7 +388,36 @@ The below table lists the most commonly used operators.
 
 |===
 
-NOTE: For the complete list of operators, including their precedence, go to http://doc.perl6.org/language/operators
+=== Reversed Operators
+
+Adding `R` before any operator will have the effect of reversing its operands.
+
+[cols=".^m,.^m,.^m,.^m", options="header"]
+|===
+| Normal Operation | Result | Reversed Operator | Result
+
+| 2 / 3 | 0.666667 | 2 R/ 3 | 1.5
+
+| 2 - 1 | 1 | 2 R- 1 | -1
+
+|===
+
+=== Reduction Operators
+
+Reduction operators work on lists of values.
+They are formed by surrounding the operator with brackets `[]`
+
+[cols=".^m,.^m,.^m,.^m", options="header"]
+|===
+| Normal Operation | Result | Reduction Operator | Result
+
+| 1 + 2 + 3 + 4 + 5 | 15 | [+] 1,2,3,4,5 | 15
+
+| 1 * 2 * 3 * 4 * 5 | 120 | [*] 1,2,3,4,5 | 120
+
+|===
+
+NOTE: For the complete list of operators, including their precedence, go to https://docs.perl6.org/language/operators
 
 == Variables
 Perl 6 variables are classified into 3 categories: Scalars, Arrays and Hashes.
@@ -422,7 +459,7 @@ JOHN DOE
 eoD nhoJ
 ----
 
-NOTE: For the complete list of methods applicable to Strings, see http://doc.perl6.org/type/Str
+NOTE: For the complete list of methods applicable to Strings, see https://docs.perl6.org/type/Str
 
 [source,perl6]
 .Integer
@@ -435,7 +472,7 @@ say $age.is-prime;
 True
 ----
 
-NOTE: For the complete list of methods applicable to Integers, see http://doc.perl6.org/type/Int
+NOTE: For the complete list of methods applicable to Integers, see https://docs.perl6.org/type/Int
 
 [source,perl6]
 .Rational Number
@@ -452,7 +489,7 @@ say $age.nude;
 (23 10)
 ----
 
-NOTE: For the complete list of methods applicable to Rational Numbers, see http://doc.perl6.org/type/Rat
+NOTE: For the complete list of methods applicable to Rational Numbers, see https://docs.perl6.org/type/Rat
 
 === Arrays
 Arrays are lists containing multiple values.
@@ -576,7 +613,7 @@ say @tbl
 [3 z]
 ----
 
-NOTE: For the complete Array reference, see http://doc.perl6.org/type/Array
+NOTE: For the complete Array reference, see https://docs.perl6.org/type/Array
 
 === Hashes
 [source,perl6]
@@ -620,7 +657,7 @@ The capital of France is: Paris
 `.values` returns a list that contains all values. +
 We can access a specific value in the hash by specifying its key `%hash<key>`
 
-NOTE: For the complete Hash reference, see http://doc.perl6.org/type/Hash
+NOTE: For the complete Hash reference, see https://docs.perl6.org/type/Hash
 
 === Types
 In the previous examples, we did not specify what type of values the variables should hold.
@@ -628,7 +665,7 @@ In the previous examples, we did not specify what type of values the variables s
 TIP: `.WHAT` will return the type of value held in a variable.
 
 [source,perl6]
----------------------
+----
 my $var = 'Text';
 say $var;
 say $var.WHAT;
@@ -636,7 +673,7 @@ say $var.WHAT;
 $var = 123;
 say $var;
 say $var.WHAT;
----------------------
+----
 
 As you can see in the above example, the type of value in `$var` was once (Str) and then (Int).
 
@@ -646,11 +683,11 @@ Now try running the below example: +
 Notice `Int` before the variable name.
 
 [source,perl6]
------------------------------------------
+----
 my Int $var = 'Text';
 say $var;
 say $var.WHAT;
------------------------------------------
+----
 
 It will fail and return this error message: `Type check failed in assignment to $var; expected Int but got Str`
 
@@ -746,13 +783,13 @@ A block in Perl 6 is delimited by `{ }`.
 If no block is found, the variable will be available in the whole Perl 6 script.
 
 [source,perl6]
---------------------------------
+----
 {
   my Str $var = 'Text';
   say $var; #is accessible
 }
 say $var; #is not accessible, returns an error
---------------------------------
+----
 
 Since a variable is only accessible in the block where it is defined, the same variable name can be redefined in another block.
 
@@ -831,7 +868,7 @@ say $a;
 Binding variables, as you already remarked, is bi-directional. +
 `$a := $b` and `$b := $a` have the same effect.
 
-NOTE: For more info on variables, see http://doc.perl6.org/language/variables
+NOTE: For more info on variables, see https://docs.perl6.org/language/variables
 
 == Functions and mutators
 
@@ -984,7 +1021,7 @@ The `for` loop iterates over multiple values.
 my @array = [1,2,3];
 
 for @array -> $array-item {
-  say $array-item*100
+  say $array-item * 100
 }
 ----
 
@@ -1031,12 +1068,12 @@ Perl 6 belongs to the C-family languages.
 
 [source,perl6]
 ----
-loop (my $i=0; $i < 5; $i++) {
+loop (my $i = 0; $i < 5; $i++) {
   say "The current number is $i"
 }
 ----
 
-NOTE: For more info on loops and conditions, see http://doc.perl6.org/language/control
+NOTE: For more info on loops and conditions, see https://docs.perl6.org/language/control
 
 == I/O
 In Perl 6, two of the most common _Input/Output_ interfaces are the _Terminal_ and _Files_.
@@ -1066,7 +1103,7 @@ Try replacing `say` with `print` and compare both results.
 my $name;
 
 say "Hi, what's your name?";
-$name=get;
+$name = get;
 
 say "Dear $name welcome to Perl 6";
 ----
@@ -1081,7 +1118,7 @@ The above example can be written like this:
 
 [source,perl6]
 ----
-my $name = prompt("Hi, what's your name? ");
+my $name = prompt "Hi, what's your name? ";
 
 say "Dear $name welcome to Perl 6";
 ----
@@ -1192,7 +1229,7 @@ WARNING: Windows users can use `/` or `\\` to define directories +
 `C:\\rakudo\\bin` +
 `C:/rakudo/bin` +
 
-NOTE: For more info on I/O, see http://doc.perl6.org/type/IO
+NOTE: For more info on I/O, see https://docs.perl6.org/type/IO
 
 == Subroutines
 === Definition
@@ -1277,7 +1314,81 @@ say-hello;
 say-hello("Laura");
 ----
 
-NOTE: For more info on subroutines and functions, see http://doc.perl6.org/language/functions
+=== Returning values
+All the subroutines we saw so far *do something*, they display some text on the terminal.
+
+While this is perfectly normal, sometimes we do want a subroutine to *return* some kind of value that we can reuse later in the flow of our program.
+
+Under normal circumstances, the last line of code of a subroutine is considered to be the return value.
+[source,perl6]
+.Implicit return
+----
+sub squared ($x) {
+  $x ** 2;
+}
+say "7 squared is equal to " ~ squared(7);
+----
+
+Once our code gets bigger, it might be a good idea to _explicitly_ specify what we do want to return.
+This can be done using the `return` keyword.
+[source,perl6]
+.Explicit return
+----
+sub squared ($x) {
+  return $x ** 2;
+}
+say "7 squared is equal to " ~ squared(7);
+----
+==== Restricting return values
+In one of the previous examples, we saw how we can restrict the accepted argument to be of a certain type.
+The same can be done with return values.
+
+To restrict the return value to a certain type, we either use the `returns` trait or the arrow notation `-\->` in the signature.
+
+[source,perl6]
+.Using the returns trait
+----
+sub squared ($x) returns Int {
+  return $x ** 2;
+}
+say "1.2 squared is equal to " ~ squared(1.2);
+----
+
+[source,perl6]
+.Using the arrow
+----
+sub squared ($x --> Int) {
+  return $x ** 2;
+}
+say "1.2 squared is equal to " ~ squared(1.2);
+----
+If we fail to provide a return value that matches the type constraint, an error will be thrown.
+
+----
+Type check failed for return value; expected Int but got Rat (1.44)
+----
+
+[TIP]
+====
+Not only can type constraints control the type of the return value; they can also control its definedness.
+
+In the previous examples, we specified that the return value should be an `Int`, irrespective of its definedness.
+Alternatively we could have specified that the returned `Int` should be strictly defined or undefined using the following signatures: +
+`--> Int:D` and `--> Int:U`
+
+That being said, it is good practice to use those type constraints. +
+Below is the modified version of the previous example that uses `:D` to force the returned  `Int` to be defined.
+
+[source,perl6]
+----
+sub squared ($x --> Int:D) {
+  return $x ** 2;
+}
+say "1.2 squared is equal to " ~ squared(1.2);
+----
+====
+
+NOTE: For more info on subroutines and functions, see https://docs.perl6.org/language/functions
 
 == Functional Programming
 In this chapter we will take a look at some of the functionality that facilitates Functional Programming.
@@ -1352,7 +1463,7 @@ You are asked to return the unique values of this array, sorted from biggest to 
 You might try to solve the problem by writing something close to this:
 [source,perl6]
 ----
-my @array = <7 8 9 0 1 2 4 3 5 6 7 8 9 >;
+my @array = <7 8 9 0 1 2 4 3 5 6 7 8 9>;
 my @final-array = reverse(sort(unique(@array)));
 say @final-array;
 ----
@@ -1490,7 +1601,7 @@ In this example, we defined explicitly a generator enclosed in `{ }` +
 This lazy list may return (if requested) the following elements (0, 3, 6, 9, 12)
 
 [WARNING]
---
+====
 When using an explicit generator, the endpoint must be one of the values that the generator can return. +
 If we reproduce the above example with the endpoint being 10 instead of 12, it will not stop.
 The generator _jumps over_ the endpoint.
@@ -1510,7 +1621,8 @@ say $lazylist;
 my $lazylist = (0, { $_ + 3 } ...^ * > 10);
 say $lazylist;
 ----
---
+====
+
 == Classes & Objects
 In the previous chapter, we learned how Perl 6 facilitates Functional Programming. +
 In this chapter we will take a look at Object Oriented programming in Perl 6.
@@ -1650,7 +1762,6 @@ class Human {
 my $john = Human.new('John',23,'M','American');
 say $john;
 ----
-The constructor that accepts positional arguments need to be defined as seen above.
 
 === Methods
 
@@ -1767,13 +1878,13 @@ By default, all attributes are declared as _read only_ but you can explicitly do
 
 === Inheritance
 ==== Introduction
-*Inheritance* is yet another concept of object oriented programming.
+*Inheritance* is another concept of object oriented programming.
 
 When defining classes, soon enough we will realize that some attributes/methods are common to many classes. +
 Should we duplicate code? +
 NO! We should use *inheritance*
 
-Let's consider we want to define two classes a class for Human beings and a class for Employees. +
+Let's consider we want to define two classes, a class for Human beings and a class for Employees. +
 Human beings have 2 attributes: name and age. +
 Employees have 4 attributes: name, age, company and salary
 
@@ -1922,7 +2033,7 @@ Actual vs Forecast:
 ----
 
 .Explanation
-The `combo-chart` class should be a able to hold two series, one for the actual values plotted on bars,
+The `combo-chart` class should be able to hold two series, one for the actual values plotted on bars,
 and another for forecast values plotted on a line. +
 This is why we defined it as a child of `line-chart` and `bar-chart`. +
 You should have noticed that calling the method `plot` on the `combo-chart` didn't yield the required result.
@@ -2119,6 +2230,13 @@ Introspection is facilitated by:
 * `~~` is called the smart-match operator.
 It evaluates to _True_ if the object is created from the class it is being compared against or any of its inheritances.
 
+[NOTE]
+--
+For more info on Object Oriented Programming in Perl 6, see:
+
+* https://docs.perl6.org/language/classtut
+* https://docs.perl6.org/language/objects
+--
 == Exception Handling
 
 === Catching Exceptions
@@ -2247,7 +2365,7 @@ All typed exceptions descend from class `X` , below are a few examples: +
 `X::OS` is related to OS errors +
 `X::Str::Numeric` related to trying to coerce a string to a number
 
-NOTE: For a complete list of exception types and their associated methods go to http://doc.perl6.org/type.html and navigate to types starting with X.
+NOTE: For a complete list of exception types and their associated methods go to https://docs.perl6.org/type-exceptions.html
 
 
 == Regular Expressions
@@ -2564,7 +2682,7 @@ if $email ~~ / <many-letters> <dot> <many-letters> <at> <many-letters-numbers> <
 A named regex is defined using the following syntax: `my regex regex-name { regex definition }` +
 A named regex can be called using the following syntax: `<regex-name>`
 
-NOTE: For more info on regexes, see http://doc.perl6.org/language/regexes
+NOTE: For more info on regexes, see https://docs.perl6.org/language/regexes
 
 == Perl 6 Modules
 Perl 6 is a general purpose programming language. It can be used to tackle a multitude of tasks including:
@@ -2574,13 +2692,13 @@ Reusability is a very important concept whereby programmers don't have to reinve
 
 Perl 6 allows the creation and redistribution of *modules*. Each module is a packaged set of functionality that can be reused once installed.
 
-_Panda_ is a module management tool that comes with Rakudo.
+_Panda_ is a module management tool that comes with Rakudo Star.
 
 To install a specific module, type the below command in your terminal:
 
 `panda install "module name"`
 
-NOTE: The Perl 6 modules directory can be found on: http://modules.perl6.org/
+NOTE: The Perl 6 modules directory can be found on: https://modules.perl6.org/
 
 === Using Modules
 MD5 is a cryptographic hash function that produces a 128-bit hash value. +
@@ -2684,6 +2802,13 @@ $Δ++;
 say $Δ;
 ----
 
+.Unicode can be used to do math:
+[source,perl6]
+----
+my $var = 2 + ⅒;
+say $var;
+----
+
 == Parallelism, Concurrency and Asynchrony
 
 === Parallelism
@@ -2726,7 +2851,7 @@ This method will enable parallel iteration of the array elements.
 After running both examples (with and without `race`), compare the time it took for both scripts to complete.
 
 [TIP]
---
+====
 `race` will not preserve the order of elements. If you wish to do, so use `hyper` instead.
 
 [source,perl6]
@@ -2747,7 +2872,7 @@ my @result = @array.hyper.map( {$_ + 1} );
 
 If you run both examples, you should notice that one is sorted and the other is not.
 
---
+====
 
 ==== Task Parallelism
 
@@ -2809,12 +2934,12 @@ WARNING: Parallelism always adds a threading overhead. If that overhead is not o
 This is why, using `race`, `hyper`, `start` and `await` for fairly simple scripts can actually slow them down.
 
 === Concurrency and Asynchrony
-NOTE: For more info on Concurrency and Asynchronous Programming, see http://doc.perl6.org/language/concurrency
+NOTE: For more info on Concurrency and Asynchronous Programming, see https://docs.perl6.org/language/concurrency
 
-== The community
+== The Community
 
-Much discussion happens on the link:irc://irc.freenode.net/#perl6[#perl6] IRC channel. This should be your go to place for any enquiry: +
-http://perl6.org/community/irc
+* link:irc://irc.freenode.net/#perl6[#perl6] IRC channel. Much discussion happens on IRC. This should be your go to place for any enquiry: https://perl6.org/community/irc
 
-Stay tuned by reading blog posts that focus on Perl 6: +
-http://pl6anet.org/ is a Perl 6 blog aggregator.
+* link:http://pl6anet.org[pl6anet] blog aggregator. Stay tuned by reading blog posts that focus on Perl 6.
+
+* link:https://www.reddit.com/r/perl6/[/r/perl6] Subscribe to the Perl 6 subreddit.
