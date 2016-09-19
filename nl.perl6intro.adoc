@@ -13,10 +13,10 @@ Naoum Hankache <naoum@hankache.com>; Elizabeth Mattijsen <perl6intro@liz.nl>
 :lang: nl
 
 Dit document is bedoeld om je een kort overzicht te geven van de Perl 6 programmeertaal.
-Het moet je helpen om snel iets met Perl 6 te kunnen doen.
+Het is zo opgezet dat je snel leert iets met Perl 6 te kunnen doen.
 
-Sommige onderdelen van dit document refereren aan (meer complete en accuratere) delen van de (engelstalige) http://docs.perl6.org[Perl 6 documentatie].
-Indien je meer informatie over een bepaald onderwerp nodig hebt, is dat de beste plaats om die te vinden.
+Sommige onderdelen van dit document verwijzen aan (completere en preciezere) delen van de (Engelstalige) http://docs.perl6.org[Perl 6 documentatie].
+Als je meer informatie over een bepaald onderwerp nodig hebt, is dat de beste plaats om die te vinden.
 
 Je zult voorbeelden vinden bij de meeste onderwerpen in dit document.
 Neem de tijd om ze allemaal uit te proberen om ze beter te begrijpen.
@@ -28,7 +28,7 @@ Om deze in te zien, ga naar
 * https://creativecommons.org/licenses/by-sa/4.0/.
 
 .Bijdragen
-Indien je wilt bijdragen aan dit document, ga dan naar:
+Als je wilt bijdragen aan dit document, ga dan naar:
 
 * https://github.com/hankache/perl6intro
 
@@ -41,15 +41,15 @@ Alle feedback is welkom:
 :sectnums:
 == Inleiding
 === Wat is Perl 6
-Perl 6 is een programmeertaal voor algemeen gebruik met geleidelijke typering.
-In Perl 6 kan met diverse paradigma's geprogrammeerd worden.  Ondersteund worden procedureel, object-georienteerd en functioneel programmeren.
+Perl 6 is een hogere programmeertaal voor algemeen gebruik met graduele typering.
+In Perl 6 kan met diverse paradigma's geprogrammeerd worden.  Ondersteund worden onder andere procedureel, object-georienteerd en functioneel programmeren.
 
 .Perl 6 motto:
-* TMTOWTDI (uitgesproken "Timtoodi", oftewel "TimToady" in engels): There is more than one way to do it. (Er is meer dan 1 manier om het te doen)
+* TIMTOWTDI (uitgesproken "Timtoodi", oftewel "TimToady" in het Engels): There Is More Than One Way To Do It. (Er is meer dan 1 manier om het te doen)
 * Gemakkelijke dingen moeten gemakkelijk blijven, moeilijke dingen moeten gemakkelijker worden en onmogelijk dingen moeten slechts moeilijk zijn.
 
 === Jargon
-* *Perl 6*: Is een taal-specificatie met een verzameling tests.
+* *Perl 6*: Is een taalspecificatie met een verzameling tests.
 Een implementatie van Perl 6 die al deze tests succesvol kan uitvoeren, mag zich een "Perl 6" implementatie noemen.
 * *Rakudo*: Is een compiler voor Perl 6.
 * *Rakudobrew*: Is een installatie-manager van Perl 6.
@@ -60,16 +60,19 @@ Een implementatie van Perl 6 die al deze tests succesvol kan uitvoeren, mag zich
 .Linux
 . Installeer Rakudobrew: https://github.com/tadzik/rakudobrew
 
-. Installeer Rakudo: Type het volgende commando in een terminal venster `rakudobrew build moar`
+. Installeer Rakudo: Type het volgende commando in een terminalvenster `rakudobrew build moar`
 
-. Installeer Panda: Type het volgende commando in een terminal venster `rakudobrew build panda`
+. Installeer Panda: Type het volgende commando in een terminalvenster `rakudobrew build panda`
 
 .OSX
 OS X kent vier mogelijkheden:
 
 * Volg dezelfde stappen als voor Linux
+
 * Installeer met homebrew: `brew install rakudo-star`
+
 * Installeer met MacPorts: `sudo port install rakudo`
+
 * Download de meest recente installer (bestand met .dmg extensie) van http://rakudo.org/downloads/star/
 
 .Windows
@@ -232,13 +235,13 @@ Commentaar 2
 -----------------------------
 
 ==== Aanhalingstekens (Quotes)
-Letterlijke reeksen van tekens (strings) worden aangegeven door middel van enkele of dubbele aanhalingstekens.
+Een string wordt gedefinieerd door middel van enkele of dubbele aanhalingstekens.
 
 Gebruik altijd dubbele aanhalingstekens:
 
-* als er een enkel aanhalingsteken in de reeks voorkomt.
+* als er een enkel aanhalingsteken in de string voorkomt.
 
-* indien de reeks een variabele bevat die geinterpoleerd moet worden.
+* indien de string een variabele bevat die geinterpoleerd moet worden.
 
 [source,perl6]
 -----------------------------------
@@ -293,9 +296,9 @@ Onderstaande tabel toont de meest voorkomende operatoren.
 
 | >= | Infix | Numeriek groter dan of gelijk aan | 9 >= 7  | True
 
-| eq | Infix | Letterreeks gelijk | "John" eq "John"  | True
+| eq | Infix | String gelijk | "John" eq "John"  | True
 
-| ne | Infix | Letterreeks ongelijk | "John" ne "Jane"  | True
+| ne | Infix | String ongelijk | "John" ne "Jane"  | True
 
 | = | Infix | Toewijzing | my $var = 7  | Wijst de waarde `7` toe aan de variabele `$var`
 
@@ -351,17 +354,17 @@ Onderstaande tabel toont de meest voorkomende operatoren.
 
 | ! | Prefix | Forceer naar de tegenovergestelde boolean waarde | !4 | False
 
-| .. | Infix | Rij constructeur |  0..5  | Maak een rij van 0 t/m 5
+| .. | Infix | Lijst constructeur |  0..5  | Maak een lijst van 0 t/m 5
 
-| ..^ | Infix | Rij constructeur |  0..^5  | Maak een rij van 0 t/m 4
+| ..^ | Infix | Lijst constructeur |  0..^5  | Maak een lijst van 0 t/m 4
 
-| ^.. | Infix | Rij constructeur |  0^..5  | Maak een rij van 1 t/m 5
+| ^.. | Infix | Lijst constructeur |  0^..5  | Maak een lijst van 1 t/m 5
 
-| \^..^ | Infix | Rij constructeur |  0\^..^5  | maak een rij van 1 t/m 4
+| \^..^ | Infix | Lijst constructeur |  0\^..^5  | maak een lijst van 1 t/m 4
 
-| ^ | Prefix | Rij constructeur |  ^5  | Zelfde als 0..^5, maakt een rij van 0 t/m 4
+| ^ | Prefix | Lijst constructeur |  ^5  | Zelfde als 0..^5, maakt een lijst van 0 t/m 4
 
-| ... | Infix | Luie rij constructeur |  0...9999  | Maak waarden alleen aan indien daar expliciet om gevraagd wordt
+| ... | Infix | Luie lijst constructeur |  0...9999  | Maak waarden alleen aan indien daar expliciet om gevraagd wordt
 
 .2+| {vbar} .2+| Prefix .2+| Pletten | {vbar}(0..5)  | (0 1 2 3 4 5)
 
@@ -371,7 +374,7 @@ Onderstaande tabel toont de meest voorkomende operatoren.
 
 === Reversi operatoren
 
-Door een `R` te plaatsen direct voor een operator, zorg je ervoor dat er termen omgewisseld worden.
+Door een `R` te plaatsen direct voor een operator, zorg je ervoor dat de termen omgewisseld worden.
 
 [cols=".^m,.^m,.^m,.^m", options="header"]
 |===
@@ -385,7 +388,7 @@ Door een `R` te plaatsen direct voor een operator, zorg je ervoor dat er termen 
 
 === Herleidingsoperatoren
 
-Herleidingsoperatoren werken op rijen van waarden.
+Herleidingsoperatoren werken op lijsten.
 Je maakt een herleidingsoperator door vierkante haken om de operator te plaatsen `[]`
 
 [cols=".^m,.^m,.^m,.^m", options="header"]
@@ -398,19 +401,19 @@ Je maakt een herleidingsoperator door vierkante haken om de operator te plaatsen
 
 |===
 
-Merk op: voor een compleet overzicht van operatoren, inclusief hun prioriteit, ga dan naar https://docs.perl6.org/language/operators
+NOTE: voor een compleet overzicht van operatoren, inclusief hun prioriteit, ga dan naar https://docs.perl6.org/language/operators
 
-== Variables
-Perl 6 variables are classified into 3 categories: Scalars, Arrays and Hashes.
+== Variabelen
+Perl 6 variabelen kunnen worden geclassificeerd in 3 categorieen: Scalars, Arrays en Hashes.
 
-A *sigil* (Sign in Latin) is a character that is used as a prefix to categorize variables.
+Een *voorteken* (sigil) is een karakter dat als prefix gebruikt wordt om aan te geven in welke categorie een variabele hoort.
 
-* `$` is used for scalars
-* `@` is used for arrays
-* `%` is used for hashes
+* `$` geeft een scalar aan
+* `@` geeft een array aan
+* `%` geeft een hash aan
 
 === Scalars
-A scalar holds one value or reference.
+Een scalar kan 1 waarde bevatten.
 
 [source,perl6]
 ----
@@ -423,7 +426,7 @@ my $age = 99;
 say $age;
 ----
 
-A specific set of operations can be done on a scalar, depending on the value it holds.
+Afhankelijk van het type waarde dat een scalar bevat, kun je daar bepaalde operaties op uitvoeren.
 
 [source,perl6]
 .String
@@ -440,7 +443,7 @@ JOHN DOE
 eoD nhoJ
 ----
 
-NOTE: For the complete list of methods applicable to Strings, see https://docs.perl6.org/type/Str
+NOTE: Bekijk https://docs.perl6.org/type/Str voor de complete lijst van methoden die men op een string kan uitvoeren.
 
 [source,perl6]
 .Integer
@@ -453,7 +456,7 @@ say $age.is-prime;
 True
 ----
 
-NOTE: For the complete list of methods applicable to Integers, see https://docs.perl6.org/type/Int
+NOTE: Bekijk https://docs.perl6.org/type/Int voor de complete lijst van methoden die men op een geheel getal (integer) kan uitvoeren.
 
 [source,perl6]
 .Rational Number
@@ -470,10 +473,10 @@ say $age.nude;
 (23 10)
 ----
 
-NOTE: For the complete list of methods applicable to Rational Numbers, see https://docs.perl6.org/type/Rat
+NOTE: Bekijk https://docs.perl6.org/type/Rat voor de complete lijst van methoden die men op een rationeel getal kan uitvoeren.
 
 === Arrays
-Arrays are lists containing multiple values.
+Arrays bestaan uit een lijst van scalar variabelen.
 
 [source,perl6]
 ----
@@ -481,95 +484,96 @@ my @animals = 'camel','llama','owl';
 say @animals;
 ----
 
-Many operations can be done on arrays as shown in the below example:
+Vele operaties kunnen op arrays uitgevoerd worden, zoals getoond in onderstaand voorbeeld:
 
-TIP: The tilde `~` is used for string concatenation.
+TIP: De tilde `~` wordt gebruikt om strings aan elkaar te plakken.
 
 [source,perl6]
 .`Script`
 ----
-my @animals = 'camel','vicuña','llama';
-say "The zoo contains " ~ @animals.elems ~ " animals";
-say "The animals are: " ~ @animals;
-say "I will adopt an owl for the zoo";
+my @animals = 'kameel','vicuña','lama';
+say "De dierentuin heeft " ~ @animals.elems ~ " dieren";
+say "De dieren zijn: " ~ @animals;
+say "Ik ga een uil adopteren voor de dierentuin";
 @animals.push("owl");
-say "Now my zoo has: " ~ @animals;
-say "The first animal we adopted was the " ~ @animals[0];
+say "Nu heeft mijn dierentuin: " ~ @animals;
+say "Het eerste dier dat we adopteerden was de " ~ @animals[0];
 @animals.pop;
-say "Unfortunately the owl got away and we're left with: " ~ @animals;
-say "We're closing the zoo and keeping one animal only";
-say "We're going to let go: " ~ @animals.splice(1,2) ~ " and keep the " ~ @animals;
+say "Helaas is de uil ontsnapt, dus hebben we nu alleen nog: " ~ @animals;
+say "We gaan de dierention sluiten en houden nog maar 1 dier over";
+say "We laten de " ~ @animals.splice(1,2) ~ " gaan en houden de " ~ @animals;
 ----
 
-.`Output`
+.`Uitvoer`
 ----
-The zoo contains 3 animals
-The animals are: camel vicuña llama
-I will adopt an owl for the zoo
-Now my zoo has: camel vicuña llama owl
-The first animal we adopted was the camel
-Unfortunately the owl got away and we're left with: camel vicuña llama
-We're closing the zoo and keeping one animal only
-We're going to let go: vicuña llama and keep the camel
+De dierentuin heeft 3 dieren
+De dieren zijn: kameel vicuña lama
+Ik ga een uil adopteren voor de dierentuin
+Nu heeft mijn dierentuin: kameel vicuña lama uil
+Het eerste dier dat we adopteerden was de kameel
+Helaas is de uil ontsnapt, dus hebben we nu alleen nog: kameel vicuña lama
+We gaan de dierention sluiten en houden nog maar 1 dier over
+We laten de vicuña llama gaan en houden de kameel
 ----
 
-.Explanation
-`.elems` returns the number of elements in an array. +
-`.push()` adds an element to the array. +
-We can access a specific element in the array by specifying its position `@animals[0]`. +
-`.pop` removes the last element from the array. +
-`.splice(a,b)` will remove the `b` elements that start at position `a`.
+.Uitleg
+`.elems` geeft het aantal elementen in een array. +
+`.push()` voegt een element toe aan een array. +
+We kunnen een specifiek element van een array bekijken door de positie aan te geven `@animals[0]`. +
+`.pop` verwijdert het laatste element van het array. +
+`.splice(a,b)` verwijdert `b` elementen vanaf positie `a`.
 
-==== Fixed-size arrays
-A basic array is declared as following:
+==== Arrays met beperkt aantal elementen
+Een gewoon array kun je als volgt specificeren:
 [source,perl6]
 my @array;
 
-The basic array can have indefinite length and thus is called auto-extending. +
-The array will accept any number of values with no restriction.
+Een gewoon array is niet beperkt wat betreft aantal elementen, het past zichzelf aan (auto-extending). +
+Men kan in een gewoon array zoveel waarden opslaan als men wil.
 
-In contrast, we can also create fixed-size arrays. +
-These arrays can not be accessed beyond their defined size.
+Daarentegen is het ook mogelijk om een array aan te maken met een beperkt aantal elementen.
+Dit soort arrays verbieden toegang tot niet-bestaande elementen.
 
-To declare an array of fixed size, specify its maximum number of elements in square brackets immediately after its name:
+Specificeer het aantal elementen in vierkante haken direct achter de naam van een array om een array met beperkt aantal elementen te specificeren:
 [source,perl6]
 my @array[3];
 
-This array will be able to hold a maximum of 3 values, indexed from 0 to 2.
+Dit array kan hoogstens 3 waarden bevatten, met als indexwaarden 0 t/m 2.
 
 [source,perl6]
 ----
 my @array[3];
-@array[0] = "first value";
-@array[1] = "second value";
-@array[2] = "third value";
+@array[0] = "eerste waarde";
+@array[1] = "tweede waarde";
+@array[2] = "derde waarde";
 ----
 
-You will not be able to add a fourth value to this array:
+Het is niet mogelijk om een vierde waarde aan dit array toe te voegen:
 [source,perl6]
 ----
 my @array[3];
-@array[0] = "first value";
-@array[1] = "second value";
-@array[2] = "third value";
-@array[3] = "fourth value";
+@array[0] = "eerste waarde";
+@array[1] = "tweede waarde";
+@array[2] = "derde waarde
+@array[3] = "vierde waarde";
 ----
 
 ----
 Index 3 for dimension 1 out of range (must be 0..2)
 ----
 
-==== Multidimensional arrays
+==== Multidimensionele arrays
+De arrays die we tot nu toe gezien hebben, hadden maar 1 dimensie. +
 The arrays we saw until now are one-dimensional. +
-Fortunately, we can define multi-dimensional arrays in Perl 6.
+We kunnen echter ook arrays met meer dan 1 dimensie in Perl 6 specificeren.
 
 [source,perl6]
 my @tbl[3;2];
 
-This array is two-dimensional.
-The first dimension can have a maximum of 3 values and the second dimension a maximum of 2 values.
+Dit array heeft 2 dimensies.
+De eerste dimensie kan maximaal 3 waarden hebben, en de tweede dimensie maximaal 2 waarden.
 
-Think of it as a 3x2 grid.
+Zie het als een rooster van 3x2.
 
 [source,perl6]
 ----
@@ -587,67 +591,77 @@ say @tbl
 [[1 x] [2 y] [3 z]]
 ----
 
-.Visual representation of the array:
+.Visuele weergave van het array:
 ----
 [1 x]
 [2 y]
 [3 z]
 ----
 
-NOTE: For the complete Array reference, see https://docs.perl6.org/type/Array
+NOTE: zie https://docs.perl6.org/type/Array voor volledige informatie over arrays.
 
 === Hashes
 [source,perl6]
-.A Hash is a set of Key/Value pairs.
+.Een Hash is een verzameling van naam/waarde paren (key/value pairs)
 ----
-my %capitals = ('UK','London','Germany','Berlin');
-say %capitals;
+my %hoofdsteden = ('VK','Londen','Duitsland','Berlijn');
+say %hoofdsteden;
+----
+
+.`Uitvoer`
+----
+{Duitsland => Berlijn, VK => Londen}
 ----
 
 [source,perl6]
-.Another succinct way of filling the hash:
+.Een andere manier om een hash te vullen:
 ----
-my %capitals = (UK => 'London', Germany => 'Berlin');
-say %capitals;
+my %hoofdsteden = (UK => 'London', Germany => 'Berlin');
+say %hoofdsteden;
 ----
 
-Some of the methods that can be called on hashes are:
+.`Uitvoer`
+----
+{Duitsland => Berlijn, VK => Londen}
+----
+
+Dit zijn een aantal van de methoden die men op een hash kan uitvoeren:
 [source,perl6]
 .`Script`
 ----
-my %capitals = (UK => 'London', Germany => 'Berlin');
-%capitals.push: (France => 'Paris');
-say %capitals.kv;
-say %capitals.keys;
-say %capitals.values;
-say "The capital of France is: " ~ %capitals<France>;
+my %hoofdsteden = (VK => 'Londen', Duitsland => 'Berlijn');
+%hoofdsteden.push: (Frankrijk => 'Parijs');
+say %hoofdsteden.kv;
+say %hoofdsteden.keys;
+say %hoofdsteden.values;
+say "De hoofdstad van Frankrijk is: " ~ %hoofdsteden<Frankrijk>;
 ----
 
-.`Output`
+.`Uitvoer`
 ----
-(France Paris Germany Berlin UK London)
-(France Germany UK)
-(Paris Berlin London)
-The capital of France is: Paris
+(Frankrijk Parijs Duitsland Berlijn VK Londen)
+(Frankrijk Duitsland VK)
+(Parijs Berlijn Londen)
+De hoofdstad van Frankrijk is: Parijs
 ----
 
-.Explanation
-`.push: (key => 'Value')` adds a new key/value pair. +
-`.kv` returns a list containing all keys and values. +
-`.keys` returns a list that contains all keys. +
-`.values` returns a list that contains all values. +
-We can access a specific value in the hash by specifying its key `%hash<key>`
+.Uitleg
+`.push: (naam => 'Waarde')` voegt een nieuw naam/waarde paar toe. +
+`.kv` geeft een lijst met alle namen en waarden terug. +
+`.keys` geeft een lijst met alle namen terug. +
+`.values` geeft een lijst met alle waarden terug. +
+De waarde behorende bij een gegeven naam kun je opvragen door die naam te specificeren `%hash<naam>`
 
-NOTE: For the complete Hash reference, see https://docs.perl6.org/type/Hash
+NOTE: Zie https://docs.perl6.org/type/Hash voor alle informatie over hashes.
 
 === Types
-In the previous examples, we did not specify what type of values the variables should hold.
+In de voorafgaande voorbeelden hebben we niet het type van de waarde aangegeven die in een variabele opgeslagen kan worden.
 
-TIP: `.WHAT` will return the type of value held in a variable.
+TIP: `.WHAT` geeft het type van de waarde in een variabele terug.
 
 [source,perl6]
 ----
-my $var = 'Text';
+my $var = 'Tekst';
 say $var;
 say $var.WHAT;
 
@@ -656,77 +670,77 @@ say $var;
 say $var.WHAT;
 ----
 
-As you can see in the above example, the type of value in `$var` was once (Str) and then (Int).
+Zoals je kunt zien in bovenstaand voorbeeld, was het type van de waarde in `$var` eerst (Str) en daarna (Int).
 
-This style of programming is called dynamic typing. Dynamic in the sense that variables may contain values of Any type.
+Deze stijl van programmeren wordt dynamische typering (dynamic typing) genoemd.  Dynamisch in de betekenis dat de variable waarden mag bevatten van elk (Any) type.
 
-Now try running the below example: +
-Notice `Int` before the variable name.
+Probeer nu onderstaand voorbeeld uit te voeren: +
+Merk op dat we `Int` voor de naam van de variabele hebben geplaatst.
 
 [source,perl6]
 ----
-my Int $var = 'Text';
+my Int $var = 'Tekst';
 say $var;
 say $var.WHAT;
 ----
 
-It will fail and return this error message: `Type check failed in assignment to $var; expected Int but got Str`
+Het zal fout gaan en terug komen met dit foutbericht: `Type check failed in assignment to $var; expected Int but got Str`
 
-What happened is that we specified beforehand that the variable should be of type (Int).
-When we tried to assign an (Str) to it, it failed.
+Wat hier gebeurde is dat we van te voren hadden aangegeven dat de variabele alleen maar (Int) zou accepteren.
+Toen we probeerden om er een string (Str) aan toe te wijzen, was dat niet mogelijk en ging het fout.
 
-This style of programming is called static typing. Static in the sense that variable types are defined before assignment and cannot change.
+Deze stijl van programmeren wordt "statische typering" (static typing) genoemd.  Statisch omdat het type van variabelen wordt gedefinieerd voordat er aan wordt toegewezen, en deze later niet kan worden veranderd.
 
-Perl 6 is classified as *gradually typed*; it allows both *static* and *dynamic* typing.
+Perl 6 wordt aangeduid met "graduele typering": het laat namelijk zowel *statische* als *dynamische* typering toe.
 
-.Arrays and hashes can also be statically typed:
+.Arrays en hashes kunnen ook statisch getypeerd worden:
 [source,perl6]
 ----
 my Int @array = 1,2,3;
 say @array;
 say @array.WHAT;
 
-my Str @multilingual = "Hello","Salut","Hallo","您好","안녕하세요","こんにちは";
-say @multilingual;
-say @multilingual.WHAT;
+my Str @veeltalig = "Hello","Salut","Hallo","您好","안녕하세요","こんにちは";
+say @veeltalig;
+say @veeltalig.WHAT;
 
-my Str %capitals = (UK => 'London', Germany => 'Berlin');
-say %capitals;
-say %capitals.WHAT;
+my Str %hoofdsteden = (VK => 'Londen', Duitsland => 'Berlijn');
+say %hoofdsteden;
+say %hoofdsteden.WHAT;
 
-my Int %country-codes = (UK => 44, Germany => 49);
-say %country-codes;
-say %country-codes.WHAT;
+my Int %landennummers = (VK => 44, Duitsland => 49);
+say %landennummers;
+say %landennummers.WHAT;
 ----
 
-.Below is a list of the most commonly used types:
-You will most probably never use the first two but they are listed for informational purpose.
+.Hieronder vind je een lijst van meest voorkomende typen:
+Je zult hoogstwaarschijnlijk de eerste twee nooit gebruiken, maar we laten ze hier zien om je te laten weten dat ze bestaan.
 
 [cols="^.^1m,.^3m,.^2m,.^1m, options="header"]
 |===
 
-| *Type* | *Description* | *Example* | *Result*
+| *Type* | *Beschrijving* | *Voorbeeld* | *Resultaat*
 
-| Mu | The root of the Perl 6 type hierarchy | |
+| Mu | De ultieme basis van de Perl 6 typen hierarchie | |
 
-| Any | Default base class for new classes and for most built-in classes | |
+| Any | Het basis type voor nieuwe klassen en de meeste standaard klassen | |
 
-| Cool | Value that can be treated as a string or number interchangeably | my Cool $var = 31; say $var.flip; say $var * 2; | 13 62
+| Cool | Waarden die zowel als string of als number kunnen worden beschouwd | my Cool $var = 31; say $var.flip; say $var * 2; | 13 62
 
-| Str | String of characters | my Str $var = "NEON"; say $var.flip; | NOEN
+| Str | Een string: reeks van karakters | my Str $var = "NEON"; say $var.flip; | NOEN
 
-| Int | Integer (arbitrary-precision) | 7 + 7 | 14
+| Int | Integer (elke gewenste precisie) | 7 + 7 | 14
 
-| Rat | Rational number (limited-precision) | 0.1 + 0.2 | 0.3
+| Rat | Rationeel nummer (beperkte precisie) | 0.1 + 0.2 | 0.3
 
 | Bool | Boolean | !True | False
 
 |===
 
-=== Introspection
+=== Introspectie
 
-Introspection is the process of getting information about an object properties like its type. +
-In one of the previous example we used `.WHAT` to return the type of the variable.
+Met introspectie bedoelen we het process waarmee we informatie over de eigenschappen van een object kunnen bekijken, zoals het type. +
+In een van de vorige voorbeelden gebruikten we `.WHAT` om het type van een variabele te achterhalen.
 
 [source,perl6]
 ----
@@ -744,59 +758,60 @@ $var2 = Nil;
 say $var2.WHAT;   # (Any)
 ----
 
-The type of a variable holding a value is correlated to its value. +
-The type of a strongly declared empty variable is the type with which it was declared. +
-The type of an empty variable that wasn't strongly declared is `(Any)` +
-To clear the value of a variable, assign `Nil` to it.
+Het type van een variabele waarin een waarde is opgeslagen, is gecorreleerd aan die waarde. +
+Het type van een lege variabele die gespecificeerd is met een type, is het type waarmee het werd gespecificeerd. +
+Het type van een lege variabele die niet is gespecificeerd met een type, is `(Any)` +
+Om de waarde uit een variabele te verwijderen, kun je de waarde `Nil` toewijzen.
 
-=== Scoping
-Before using a variable for the first time, it needs to be declared.
+=== Bereik (scoping)
+Voordat men een variabele voor de eerste keer kan gebruiken, moet deze worden gespecificeerd.
 
-Several declarators are used in Perl 6, `my` is what we have been using so far in the examples above.
+Dit kan op diverse manieren in Perl 6, `my` is wat we tot nu toe in de bovenstaande voorbeelden hebben gebruikt.
 
 [source,perl6]
 my $var=1;
 
-The `my` declarator give the variable *lexical* scope.
-In other words, the variable will only be accessible in the same block it was declared.
+Met `my` geeft men de variabele een *statisch* bereik (ook wel *lexicaal bereik genoemd).
+In andere woorden, de variabele zal alleen maar toegankelijk zijn in het gebied (scope) waarin het was gespecificeerd.
 
-A block in Perl 6 is delimited by `{ }`.
-If no block is found, the variable will be available in the whole Perl 6 script.
+Zo'n gebied (scope) wordt in Perl 6 begrensd door `{ }`.
+Een variabele zal alleen toegankelijk zijn in een Perl 6 script als er geen gebiedsbegrenzing gevonden wordt.
 
 [source,perl6]
 ----
 {
-  my Str $var = 'Text';
-  say $var; #is accessible
+  my Str $var = 'Tekst';
+  say $var; # is toegankelijk
 }
-say $var; #is not accessible, returns an error
+say $var; #is niet toegankelijk, geeft een foutmelding
 ----
 
-Since a variable is only accessible in the block where it is defined, the same variable name can be redefined in another block.
+Aangzien zo'n variabele alleen toegankelijk is in het gebied waarin het was gedefinieerd, kan men dezelfde naam voor een variabele gebruiken in een ander gebied.
 
 [source,perl6]
 ----
 {
-  my Str $var = 'Text';
+  my Str $var = 'Tekst';
   say $var;
 }
 my Int $var = 123;
 say $var;
 ----
 
-=== Assignment vs. Binding
-We've seen in the previous examples, how to *assign* values to variables. +
-*Assignment* is done using the `=` operator.
+=== Toewijzing vs. verbinden
+We hebben in de vorige voorbeelden gezien hoe we waarden aan variabelen kunnen *toewijzen*. +
+*Toewijzing* wordt gedaan met de `=` operator.
+
 [source,perl6]
 ----
 my Int $var = 123;
 say $var;
 ----
 
-We can change the value assigned to a variable:
+We kunnen de waarde van een variabele veranderen:
 
 [source,perl6]
-.Assignment
+.Toewijzing
 ----
 my Int $var = 123;
 say $var;
@@ -804,17 +819,17 @@ $var = 999;
 say $var;
 ----
 
-.`Output`
+.`Uitvoer`
 ----
 123
 999
 ----
 
-On the other hand, we cannot change the value *bound* to a variable. +
-*Binding* is done using the `:=` operator.
+Daarentegen kunnen we de waarde van een variabele niet veranderen als deze is *verbonden* met een variabele. +
+*Verbinding* wordt gedaan met de `:=` operator.
 
 [source,perl6]
-.Binding
+.Verbinden
 ----
 my Int $var := 123;
 say $var;
@@ -829,7 +844,7 @@ Cannot assign to an immutable value
 ----
 
 [source,perl6]
-.Variables can also be bound to other variables:
+.Variabelen kunnen ook verbonden worden met andere variabelen:
 ----
 my $a;
 my $b;
@@ -840,36 +855,36 @@ $b = 8;
 say $a;
 ----
 
-.`Output`
+.`Uitvoer`
 ----
 7
 8
 ----
 
-Binding variables, as you already remarked, is bi-directional. +
-`$a := $b` and `$b := $a` have the same effect.
+Het verbinden van variabelen werkt twee kanten op, zoals je al gezien hebt. +
+`$a := $b` en `$b := $a` hebben hetzelfde effect.
 
-NOTE: For more info on variables, see https://docs.perl6.org/language/variables
+NOTE: Zie https://docs.perl6.org/language/variables voor meer informatie over variabelen.
 
-== Functions and mutators
+== Functies en mutators
 
-It is important to differentiate between functions and mutators. +
-Functions do not change the initial state of the object they were called on. +
-Mutators modify the state of the object.
+Het is belangrijk om verschil te maken tussen functies en mutators. +
+Functies veranderen de toestand van een object waarop ze worden uitgevoerd *niet*. +
+Mutators veranderen de toestand van een object *wel*.
 
 [source,perl6,linenums]
 .`Script`
 ----
-my @numbers = [7,2,4,9,11,3];
+my @nummers = [7,2,4,9,11,3];
 
-@numbers.push(99);
-say @numbers;      #1
+@nummers.push(99);
+say @nummers;      #1
 
-say @numbers.sort; #2
-say @numbers;      #3
+say @nummers.sort; #2
+say @nummers;      #3
 
-@numbers.=sort;
-say @numbers;      #4
+@nummers.=sort;
+say @nummers;      #4
 ----
 
 .`Output`
@@ -880,160 +895,161 @@ say @numbers;      #4
 [2 3 4 7 9 11 99] #4
 ----
 
-.Explanation
-`.push` is a mutator, it changes the state of the array (#1)
+.Uitleg
+`.push` is een mutator, het verandert de toestand van het array (#1)
 
-`.sort` is a function, it returns a sorted array but doesn't modify the state of the initial array:
+`.sort` is een functie, het geeft het gesorteerde array terug als een lijst, maar verandert de toestand van het array zelf niet.
 
-* (#2) shows that it returned a sorted array.
+* (#2) laat zien dat een gesorteerde lijst is teruggegeven.
 
-* (#3) shows that the initial array is still unmodified.
+* (#3) laat zien dat het array zelf onveranderd is.
 
-In order to enforce a function to act as a mutator, we use `.=` instead of `.` (#4) (Line 9 of the script)
+Men kan een functie als een mutator laten optreden door `.=` in plaats van `.` te gebruiken (#4) (regel 9 van het script)
 
-== Loops and conditions
-Perl 6 has a multitude of conditionals and looping constructs.
+== Lussen en condities
+Perl 6 heeft een veelheid aan conditionele- en lusconstructies.
 
 === if
-The code runs only if the condition has been met, or in other words the expression evaluates to `True`.
+De code in het bereik van de conditionele constructie  wordt alleen maar uitgevoerd *indien* de conditie waar (`True`) is.
 
 [source,perl6]
 ----
-my $age = 19;
+my $leeftijd = 19;
 
-if $age > 18 {
-  say 'Welcome'
+if $leeftijd > 18 {
+    say 'Welkom'
 }
 ----
 
-In Perl 6 we can invert the code and the condition. +
-Even if the code and the condition have been inverted, the condition is always evaluated first.
+In Perl 6 kunnen we de volgorde van de code en de conditie omkeren. +
+Maar zelfs als de volgorde is omgekeerd, zal de conditie altijd eerst worden uitgevoerd.
 
 [source,perl6]
 ----
-my $age = 19;
+my $leeftijd = 19;
 
-say 'Welcome' if $age > 18;
+say 'Welkom' if $leeftijd > 18;
 ----
 
-If the condition is not met, we can still specify alternative blocks for execution using:
+We kunnen alternatieve bereiken voor uitvoering aangeven voor het geval dat de conditie niet waar is:
 
 * `else`
 * `elsif`
 
 [source,perl6]
 ----
-#run the same code for different values of the variable
-my $number-of-seats = 9;
+#voer deze code uit voor verschillende waarden van de variabele
+my $aantal-stoelen = 9;
 
-if $number-of-seats <= 5 {
-  say 'I am a sedan'
-} elsif $number-of-seats <= 7 {
-  say 'I am 7 seater'
+if $aantal-stoelen <= 5 {
+    say 'Ik ben een personenauto'
+} elsif $aantal-stoelen <= 7 {
+    say 'Ik ben een busje'
 } else {
-  say 'I am a van'
+    say 'Ik ben een bus'
 }
 ----
 
 === unless
-The negated version of an if statement can be written using `unless`.
+De tegenovergestelde, ontkennende versie van een if command is `unless` (tenzij).
 
-The following code:
-
-[source,perl6]
-----
-my $clean-shoes = False;
-
-if not $clean-shoes {
-  say 'Clean your shoes'
-}
-----
-can be written as:
+Deze code:
 
 [source,perl6]
 ----
-my $clean-shoes = False;
+my $schone-schoenen = False;
 
-unless $clean-shoes {
-  say 'Clean your shoes'
+if not $schone-schoenen {
+    say 'Maak je schoenen schoon'
+}
+----
+Kan geschreven worden als:
+
+[source,perl6]
+----
+my $schone-schoenen = False;
+
+unless $schone-schoenen {
+    say 'Maak je schoenen schoon'
 }
 ----
 
-Negation in Perl 6 is done using either `!` or `not`.
+Ontkenning (negation) wordt in Perl 6 gedaan met `!` of `not`.
 
-`unless (condition)` is used instead of `if not (condition)`.
+`unless (conditie)` kan worden gebruikt in plaats van `if not (conditie)`.
 
-`unless` cannot have an `else` clause.
+`unless` kan geen `else` bereik hebben.
 
 === with
 
-`with` behaves like the `if` statement, but checks if the variable is defined.
+`with` gedraagt zich als een `if` commando, maar kijkt of de variabele een waarde heeft.
 
 [source,perl6]
 ----
 my Int $var=1;
 
 with $var {
-  say 'Hello'
+    say 'Hallo'
 }
 ----
 
-If you run the code without assigning a value to the variable nothing should happen.
+Als je deze code uitvoert zonder dat je een waarde aan de variabele hebt toegekend, dan zou je geen uitvoer moeten zien.
+
 [source,perl6]
 ----
 my Int $var;
 
 with $var {
-  say 'Hello'
+    say 'Hallo'
 }
 ----
 
-`without` is the negated version of `with`. You should be able to relate it to `unless`.
+`without` is de ontkennende versie van `with`.  Net als `unless` van `if`.
 
-If the first `with` condition is not met, an alternate path can be specified using `orwith`. +
-`with` and `orwith` can be compared to `if` and `elsif`.
+Indien de eerste `with` niet waar is, dan kan men een alternatief bereik aangeven met `orwith`. +
+Je kunt `with` en `orwith` zien als een soort `if` en `elsif`.
 
 === for
 
-The `for` loop iterates over multiple values.
+Met het `for` commando kun je over een aantal waarden repeteren.
 
 [source,perl6]
 ----
 my @array = [1,2,3];
 
 for @array -> $array-item {
-  say $array-item * 100
+    say $array-item * 100
 }
 ----
 
-Notice that we created an iteration variable `$array-item` in order to perform the operation `*100` on each array item.
+Merk op dat we een lusvariabele `$array-item` aanmaken om de operatie `*100` op elk element van het array uit te kunnen voeren.
 
 === given
 
-`given` is the Perl 6 equivalent of the switch statement in other languages.
+`given` is het Perl 6 equivalent van het `switch` commando in andere programmeertalen.
 
 [source,perl6]
 ----
 my $var = 42;
 
 given $var {
-    when 0..50 { say 'Less than or equal to 50'}
-    when Int { say "is an Int" }
+    when 0..50 { say 'Minder dan of gelijk aan 50'}
+    when Int { say "is een Int" }
     when 42  { say 42 }
     default  { say "huh?" }
 }
 ----
 
-After a successful match, the matching process will stop.
+Het testen van condities stops zodra een conditie van een `when` waar is geweest.
 
-Alternatively `proceed` will instruct Perl 6 to continue matching even after a successful match.
+Met `proceed` kun je in Perl 6 aangeven dat je door wilt gaan met testen van condities nadat een conditie waar was.
 [source,perl6]
 ----
 my $var = 42;
 
 given $var {
-    when 0..50 { say 'Less than or equal to 50';proceed}
-    when Int { say "is an Int";proceed}
+    when 0..50 { say 'Minder dan of gelijk aan 50';proceed}
+    when Int { say "is een Int";proceed}
     when 42  { say 42 }
     default  { say "huh?" }
 }
@@ -1041,104 +1057,104 @@ given $var {
 
 === loop
 
-`loop` is another way of writing a `for` loop.
+`loop` is een andere manier om een `for` lus aan te geven.
 
-Actually `loop` is how `for` loops are  written in C-family programming languages.
+In feite is `loop` precies zoals `for` lussen geschreven worden in de familie C-programmeertalen.
 
-Perl 6 belongs to the C-family languages.
+Perl 6 hoort bij de familie C-programmeertalen.
 
 [source,perl6]
 ----
 loop (my $i = 0; $i < 5; $i++) {
-  say "The current number is $i"
+    say "Het huidige nummer is $i"
 }
 ----
 
-NOTE: For more info on loops and conditions, see https://docs.perl6.org/language/control
+NOTE: Zie https://docs.perl6.org/language/control voor meer informatie over conditionele- en lusconstructies.
 
 == I/O
-In Perl 6, two of the most common _Input/Output_ interfaces are the _Terminal_ and _Files_.
+De twee meest voorkomende manieren van _Invoer/Uitvoer_ zijn _Terminal_ en _Bestanden_.
 
 === Basic I/O using the Terminal
 
 ==== say
-`say` writes to the standard output. It appends a newline at the end. In other words, the following code:
+`say` schrijft naar de standaard uitvoer.  Het voegt een regeleinde (newline) toe aan het einde.  In andere woorden, de volgende code:
 
 [source,perl6]
 ----
-say 'Hello Mam.';
-say 'Hello Sir.';
+say 'Hallo mevrouw.';
+say 'Hallo meneer.';
 ----
-will be written on 2 separate lines.
+zullen op 2 aparte lijnen worden getoond.
 
 ==== print
-`print` on the other hand behaves like `say` but doesn't add a new line.
+Aan de andere kant doet `print` precies hetzelfde, maar het voegt geen regeleinde toe.
 
-Try replacing `say` with `print` and compare both results.
+Probeer eens om de `say` door een `print` te vervangen en vergelijk de resultaten.
 
 ==== get
-`get` is used to capture input from the terminal.
+Men kan `get` gebruiken om invoer van de terminal te krijgen.
 
 [source,perl6]
 ----
-my $name;
+my $naam;
 
-say "Hi, what's your name?";
+say "Hoi, hoe heet je?";
 $name = get;
 
-say "Dear $name welcome to Perl 6";
+say "Welkom bij Perl 6, beste $naam";
 ----
 
-When the above code runs, the terminal will be waiting for you to input your name and hit [Enter].
-Subsequently, it will greet you.
+Indien je bovenstaande code uitvoert zal de terminal wachten tot je je naam intypt en op [Enter] drukt.
+Vervolgens zal het je begroeten.
 
 ==== prompt
-`prompt` is a combination of `print` and `get`.
+`prompt` is een combinatie van `print` en `get`.
 
-The above example can be written like this:
-
-[source,perl6]
-----
-my $name = prompt "Hi, what's your name? ";
-
-say "Dear $name welcome to Perl 6";
-----
-
-=== Running Shell Commands
-Two subroutines can be used to run shell commands:
-
-* `run` Runs an external command without involving a shell
-
-* `shell` Runs a command through the system shell. It is platform and shell dependent.
-All shell meta characters are interpreted by the shell, including pipes, redirects, environment variable substitutions and so on.
+Het bovenstaande voorbeeld kan ook worden geschreven als:
 
 [source,perl6]
-.Run this if you're on Linux/OSX
 ----
-my $name = 'Neo';
-run 'echo', "hello $name";
+my $naam = prompt "Hoi, hoe heet je? ";
+
+say "Welkom bij Perl 6, beste $naam";
+----
+
+=== Uitvoeren van externe commando's
+Deze twee subroutines kunnen worden gebruikt om externe commando's uit te voeren:
+
+* `run` voert een extern commando direct uit.
+
+* `shell` voert een extern commando uit alsof je het hebt ingetypt op een commando regel (via een z.g. "shell").  Het hangt af van de systeem software die je gebruikt.
+Alle meta-karakters worden geinterpreteerd door de shell, inclusief z.g. "pipes", "redirects" en specificaties van environment variabelen.
+
+[source,perl6]
+.Voer dit uit als je met Linux/OSX werkt
+----
+my $naam = 'Neo';
+run 'echo', "hallo $naam";
 shell "ls";
 ----
 
 [source,perl6]
-.Run this if you're on Windows
+.Voer dit uit als je met Windows werkt
 ----
 shell "dir";
 ----
-`echo` and `ls` are common shell keywords on Linux: +
-`echo` prints text to the terminal (the equivalent of `print` in Perl 6) +
-`ls` lists all files and folders in the current directory
+`echo` en `ls` zijn veel voorkomende commando's op Linux/OSX: +
+`echo` drukt de parameters af (het equivalent van `print` in Perl 6) +
+`ls` laat alle bestanden en directories zien in de huidige directory
 
-`dir` is the equivalent of `ls` on Windows.
+`dir` is het equivalent van `ls` bij Windows.
 
 
 === File I/O
 ==== slurp
-`slurp` is used to read data from a file.
+Men kan `slurp` gebruiken om een geheel bestand in te lezen.
 
-Create a text file with the following content:
+Maak een tekstbestand aan met de volgende inhoud:
 
-.datafile.txt
+.scores.txt
 ----
 John 9
 Johnnie 7
@@ -1147,70 +1163,70 @@ Joanna 7
 ----
 [source,perl6]
 ----
-my $data = slurp "datafile.txt";
+my $data = slurp "scores.txt";
 say $data;
 ----
 
 ==== spurt
-`spurt` is used to write data to a file.
+Men kan `spurt` gebruiken om data naar een bestand te schrijven.
 
 [source,perl6]
 ----
-my $newdata = "New scores:
+my $nieuw = "Nieuwe scores:
 Paul 10
 Paulie 9
 Paulo 11";
 
-spurt "newdatafile.txt", $newdata;
+spurt "nieuwescores.txt", $nieuw;
 ----
 
-After running the above code, a new file named _newdatafile.txt_ will be created. It will contain the new scores.
+Nadat je de bovenstaande code hebt uitgevoerd, bestaat er een bestand _nieuwescores.txt_ .  Dat zal dan de nieuwe scores bevatten.
 
-=== Working with files and directories
-Perl 6 can list the contents of a directory without running shell commands (using `ls`) as seen in a previous example.
+=== Werken met bestanden en directories
+Perl 6 kan de inhoud van een directory ook direct tonen zonder dat er externe commando's voor hoeven te worden uitgevoerd, net zoals in een van de vorige voorbeelden.
 
 [source,perl6]
 ----
-say dir;              #List files and folders in the current directory
-say dir "/Documents"; #List files and folders in the specified directory
+say dir;              #Laat bestanden/directories uit de huidige directory zien
+say dir "/Documents"; #Laat bestanden/directories zien van de gegeven directory
 ----
 
-In addition to that you can create new directories and delete them.
+Tevens kun je ook nieuwe directories aanmaken en verwijderen.
 
 [source,perl6]
 ----
-mkdir "newfolder";
-rmdir "newfolder";
+mkdir "nieuwdir";
+rmdir "nieuwdir";
 ----
 
-`mkdir` creates a new directory. +
-`rmdir` delete an empty directory. Returns an error if not empty.
+`mkdir` maakt een nieuwe directory aan. +
+`rmdir` verwijdert een lege directory.  Returned een foutmelding indien niet leeg.
 
-You can also check if the specified path exists, if it is a file or a directory:
+Je kunt ook kijken of een specifieke naam bestaat, en of het een bestand of een directory is:
 
-In the directory where you will be running the below script, create an empty folder `folder123` and an empty pl6 file `script123.pl6`
+Maak in de directory waar je dit script gaat uitvoeren een lege directory `dir123` en een leeg bestand genaamd `script123.pl6`
 
 [source,perl6]
 ----
 say "script123.pl6".IO.e;
-say "folder123".IO.e;
+say "dir123".IO.e;
 
 say "script123.pl6".IO.d;
-say "folder123".IO.d;
+say "dir123".IO.d;
 
 say "script123.pl6".IO.f;
-say "folder123".IO.f;
+say "dir123".IO.f;
 ----
 
-`IO.e` checks if the directory/file exists. +
-`IO.f` checks if the path is a file. +
-`IO.d` checks if the path is a directory.
+`IO.e` geeft terug of de naam bestaat. +
+`IO.f` geeft terug of het een bestand is. +
+`IO.d` geeft terug of het een directory is.
 
-WARNING: Windows users can use `/` or `\\` to define directories +
+WARNING: Gebruikers van Windows kunnen zowel de `/` als de `\\` gebruiken om directories aan te maken +
 `C:\\rakudo\\bin` +
 `C:/rakudo/bin` +
 
-NOTE: For more info on I/O, see https://docs.perl6.org/type/IO
+NOTE: Zie https://docs.perl6.org/type/IO voor meer informatie over invoer en uitvoer.
 
 == Subroutines
 === Definition
