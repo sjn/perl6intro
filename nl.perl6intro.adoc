@@ -45,7 +45,7 @@ Perl 6 is een hogere programmeertaal voor algemeen gebruik met graduele typering
 In Perl 6 kan met diverse paradigma's geprogrammeerd worden.  Ondersteund worden onder andere procedureel, object-georienteerd en functioneel programmeren.
 
 .Perl 6 motto:
-* TIMTOWTDI (uitgesproken "Timtoodi", oftewel "TimToady" in het Engels): There Is More Than One Way To Do It. (Er is meer dan 1 manier om het te doen)
+* TIMTOWTDI (uitgesproken "Timtoodi", oftewel "TimToady" in het Engels): There Is More Than One Way To Do It. (Er is meer dan één manier om het te doen)
 * Gemakkelijke dingen moeten gemakkelijk blijven, moeilijke dingen moeten gemakkelijker worden en onmogelijk dingen moeten slechts moeilijk zijn.
 
 === Jargon
@@ -60,9 +60,9 @@ Een implementatie van Perl 6 die al deze tests succesvol kan uitvoeren, mag zich
 .Linux
 . Installeer Rakudobrew: https://github.com/tadzik/rakudobrew
 
-. Installeer Rakudo: Type het volgende commando in een terminalvenster `rakudobrew build moar`
+. Installeer Rakudo: Typ het volgende commando in een terminalvenster `rakudobrew build moar`
 
-. Installeer Panda: Type het volgende commando in een terminalvenster `rakudobrew build panda`
+. Installeer Panda: Typ het volgende commando in een terminalvenster `rakudobrew build panda`
 
 .OSX
 OS X kent vier mogelijkheden:
@@ -76,39 +76,38 @@ OS X kent vier mogelijkheden:
 * Download de meest recente installer (bestand met .dmg extensie) van http://rakudo.org/downloads/star/
 
 .Windows
-. Download de meest recenter installer (bestand met .msi extensie) van http://rakudo.org/downloads/star/ +
-Op een 32-bit systeem, download het bestand met x86; op een 64-bit, download dan het x86_64 bestand.
+. Download de meest recente installer (bestand met .msi extensie) van http://rakudo.org/downloads/star/ +
+Op een 32-bit systeem, download het bestand met x86; op een 64-bit, download het x86_64 bestand.
 . Zorg ervoor dat `C:\rakudo\bin` in je PATH is na het installeren.
 
 .Docker
 . Gebruik het officiele Docker image `docker pull rakudo-star`
-. Voer dan een container uit met het image `docker run -it rakudo-star`
+. Voer daarna een container uit met het image `docker run -it rakudo-star`
 
 === Uitvoeren van Perl 6 code
 
-Je kunt eenvoudig Perl 6 code uitvoeren in de REPL (Read-Eval-Print-Loop,
-oftewel een lees, evalueer, print, lus).
-Om dit te doen open je een terminal venster, type `perl6` en druk op [Enter].  Er verschijnt dan een `>` prompt.
-Vervolgens kun je een regel code intypen en weer op [Enter] drukken.  De REPL zal dan de uiteindelijke waarde van die code afdrukken.  Je kunt dan weer een regel code intypen, of `exit` intypen en op [Enter] drukken om de REPL te verlaten.
+Je kunt eenvoudig Perl 6 code uitvoeren in de REPL (Read-Eval-Print-Loop, oftewel een lees, evalueer, print, lus).
+Open daarvoor een terminalvenster, type `perl6` en druk op [Enter].  Er verschijnt dan een `>` prompt.
+Vervolgens kun je een regel code intypen en weer op [Enter] drukken.  De REPL zal dan de uiteindelijke waarde van die code afdrukken op het scherm.  Je kunt dan weer een regel code intypen, of `exit` intypen en op [Enter] drukken om de REPL te verlaten.
 
-Een andere mogelijkheid is om je code in een bestand op te slaan en dan uit te voeren.
-Het wordt aangeraden om een Perl 6 script de extensie `.pl6` te geven.
+Je kunt je code natuurlijk ook opslaan in een bestand, dat je daarna gaat uitvoeren.
+We raden aan om een Perl 6 script de extensie `.pl6` te geven, zodat het later te herkennen is als Perl 6 bestand.
 Voer het bestand uit door `perl6 bestandsnaam.pl6` in het terminal venster in te typen en op [Enter] te drukken.  Anders dan bij de REPL zal die niet automatisch het resultaat van elke regel afdrukken: daarvoor moet je een opdracht als `say` in je programma plaatsen om iets af te drukken.
 
-De REPL wordt meestal gebruikt om een specifiek stukje code uit te proberen, meestal niet meer dan een enkele regel.  Voor programma's die uit meer dan een regel bestaan, wordt het aangeraden om die regels in een bestand op te slaan en dan dat bestand uit te voeren.
+De REPL wordt meestal gebruikt om een specifiek stukje code uit te proberen, meestal niet meer dan een enkele regel.  Voor programma's die uit meer dan een regel bestaan, wordt aangeraden om die regels in een bestand op te slaan en dan dat bestand uit te voeren.
 
-Je kunt ook een regel code non-interactief uitproberen op de commando-regel in een terminal venster met `perl6 -e 'jouw regel code'` in te typen en dan op [Enter] te drukken.
+Je kunt ook een regel code non-interactief uitproberen op de commando-regel in een terminal venster, door `perl6 -e 'jouw regel code'` in te typen en dan op [Enter] te drukken.
 
 [TIP]
 --
-In de Rakudo Star bundel zit ook een regel-editor die het uitproberen in de REPL nog gemakkelijker maakt.
+In de bundel Rakudo Star zit ook een regel-editor die het uitproberen in de REPL nog gemakkelijker maakt.
 
-Indien je alleen maar Rakudo hebt geinstalleerd, en niet Rakudo Star, dan zijn niet alle handige regel-editor mogelijkheden (zoals pijltje naar onder/boven om eerder ingetypte regels te bekijken, pijltje links/rechts om je invoer te veranderen, en automatisch invullen met TAB).
-Denk er dan over om het volgende command uit te voeren om deze functionaliteit te installeren:
+Als je alleen maar Rakudo hebt geinstalleerd, en niet Rakudo Star, dan heb je standaard niet alle handige regel-editor mogelijkheden (zoals pijltje naar onder/boven om eerder ingetypte regels te bekijken, pijltje links/rechts om je invoer te veranderen, en automatisch invullen met TAB).
+Voer het volgende commando uit om deze functionaliteit te installeren:
 
 * `panda install Linenoise` werkt op Windows, Linux en OSX
 
-* `panda install Readline` als je op Linux werkt en de _Readline_ bibliotheek prefereert
+* `panda install Readline` als je op Linux werkt en liever werkt met de _Readline_ bibliotheek
 --
 
 === Bewerkingsprogramma's (Editors)
@@ -119,7 +118,7 @@ https://atom.io/packages/language-perl6fe[Perl6-fe] is een alternatieve Perl 6 s
 
 Andere mensen in de gemeenschap gebruiken ook http://www.vim.org/[Vim], https://www.gnu.org/software/emacs/[Emacs] of http://padre.perlide.org/[Padre].
 
-Recent versies van Vim worden standaard uitgeleverd met een syntax-markeerder. Emacs en Padre hebben de installatie van extra bibliotheken nodig.
+Recente versies van Vim worden standaard uitgeleverd met een syntax-markeerder. Emacs en Padre hebben de installatie van extra bibliotheken nodig.
 
 
 === Hello World!
@@ -1142,7 +1141,7 @@ shell "ls";
 shell "dir";
 ----
 `echo` en `ls` zijn veel voorkomende commando's op Linux/OSX: +
-`echo` drukt de parameters af (het equivalent van `print` in Perl 6) +
+`echo` drukt de argumenten af (het equivalent van `print` in Perl 6) +
 `ls` laat alle bestanden en directories zien in de huidige directory
 
 `dir` is het equivalent van `ls` bij Windows.
@@ -1229,25 +1228,26 @@ WARNING: Gebruikers van Windows kunnen zowel de `/` als de `\\` gebruiken om dir
 NOTE: Zie https://docs.perl6.org/type/IO voor meer informatie over invoer en uitvoer.
 
 == Subroutines
-=== Definition
-*Subroutines* (also called *subs* or *functions*) are a means of packaging a set of functionality. +
+=== Definitie
+*Subroutines* (ook wel *subs* of *functies*) zijn een manier om een stuk functionaliteit in een pakketje te stoppen. +
 
-A subroutine definition begins with the keyword `sub`. After their definition, they can be called by their handle. +
-Check out the below example:
+De definitie van een subroutine begint met het sleutelwoord `sub`.  Na de definitie kun je het aanroepen met de naam die je het gegeven hebt. +
+Bekijk onderstaand voorbeeld:
 
 [source,perl6]
 ----
-sub alien-greeting {
-  say "Hello earthlings";
+sub buitenaardse-groet {
+  say "Hallo aardlingen";
 }
 
-alien-greeting;
+buitenaardse-groet;
 ----
 
-The previous example showcased a subroutine that  doesn't require any input.
+Het vorige voorbeeld laat een subroutine zien die geen invoer nodig heeft.
 
-=== Signature
-Many subroutines would require some input in order to work. That input is provided by *arguments*.
+=== Signatuur
+Veel subroutines hebben een vorm van invoer nodig om hun werk te kunnen doen.  Die invoer wordt gegeven door *argumenten*.
+Het aantal en type van de 
 The number and type of arguments that this subroutine accepts is called its *signature*.
 
 The below subroutine accepts a string argument.

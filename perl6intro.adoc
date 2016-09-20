@@ -1251,7 +1251,8 @@ The previous example showcased a subroutine that  doesn't require any input.
 
 === Signature
 Many subroutines would require some input in order to work. That input is provided by *arguments*.
-The number and type of arguments that this subroutine accepts is called its *signature*.
+A subroutine may define zero or more *parameters*.
+The number and type of parameters that a subroutine defines is called its *signature*.
 
 The below subroutine accepts a string argument.
 
@@ -1282,15 +1283,15 @@ greet "Johnnie";
 greet "Laura","Mrs.";
 ----
 
-=== Default and Optional Arguments
+=== Default and Optional Parameters
 If a subroutine is defined to accept an argument, and we call it without providing it with the required argument, it will fail.
 
 Alternatively Perl 6 provides us the ability to define subroutines with:
 
-* Optional Arguments
-* Default Arguments
+* Optional Parameters
+* Default Parameters
 
-Optional arguments are defined by appending `?` to the argument name.
+Optional parameters are defined by appending `?` to the parameter name.
 
 [source,perl6]
 ----
@@ -1303,7 +1304,7 @@ say-hello("Laura");
 ----
 
 If the user doesn't supply an argument, it can default to a specific value. +
-This is done by assigning a value to the argument within the subroutine definition.
+This is done by assigning a value to the parameter within the subroutine definition.
 
 [source,perl6]
 ----
@@ -1732,7 +1733,7 @@ Trying to access it outside the object will return an error.
 
 Now replace `has $!age` with `has $.age` and see what will be the result of `say $john.age;`
 
-=== Named vs. Positional Arguments
+=== Named vs. Positional Parameters
 In Perl 6, all classes inherit a default `.new()` constructor. +
 It can be used to create objects by providing it with arguments. +
 The default constructor can only be provided with *named arguments*. +
@@ -1743,7 +1744,7 @@ If you consider the above example, you'll remark that all the arguments supplied
 * age => 23
 
 
-What if i do not want to supply the name of each attribute each time i want to create a new object? +
+What if I do not want to supply the name of each attribute each time I want to create a new object? +
 Then I need to create another constructor that accepts *positional arguments*.
 
 [source,perl6]
@@ -1937,7 +1938,7 @@ class Human {
   has $.name;
   has $.age;
   method introduce-yourself {
-    say 'Hi i am a human being, my name is ' ~ self.name;
+    say 'Hi I am a human being, my name is ' ~ self.name;
   }
 }
 
@@ -1960,7 +1961,7 @@ class Human {
   has $.name;
   has $.age;
   method introduce-yourself {
-    say 'Hi i am a human being, my name is ' ~ self.name;
+    say 'Hi I am a human being, my name is ' ~ self.name;
   }
 }
 
@@ -1968,7 +1969,7 @@ class Employee is Human {
   has $.company;
   has $.salary;
   method introduce-yourself {
-    say 'Hi i am a employee, my name is ' ~ self.name ~ ' and I work at: ' ~ self.company;
+    say 'Hi I am a employee, my name is ' ~ self.name ~ ' and I work at: ' ~ self.company;
   }
 
 }
@@ -2193,7 +2194,7 @@ class Human {
   has Str $.name;
   has Int $.age;
   method introduce-yourself {
-    say 'Hi i am a human being, my name is ' ~ self.name;
+    say 'Hi I am a human being, my name is ' ~ self.name;
   }
 }
 
@@ -2201,7 +2202,7 @@ class Employee is Human {
   has Str $.company;
   has Int $.salary;
   method introduce-yourself {
-    say 'Hi i am a employee, my name is ' ~ self.name ~ ' and I work at: ' ~ self.company;
+    say 'Hi I am a employee, my name is ' ~ self.name ~ ' and I work at: ' ~ self.company;
   }
 }
 
