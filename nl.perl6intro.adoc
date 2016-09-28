@@ -243,14 +243,14 @@ Gebruik altijd dubbele aanhalingstekens:
 * indien de string een variabele bevat die geinterpoleerd moet worden.
 
 [source,perl6]
------------------------------------
-say 'Hello World';   # Hello World
-say "Hello World";   # Hello World
-say "Don't";         # Don't
-my $name = 'John Doe';
-say 'Hello $name';   # Hello $name
-say "Hello $name";   # Hello John Doe
------------------------------------
+---------------------------------------
+say 'Hallo Wereld';   # Hallo Wereld
+say "Hallo Wereld";   # Hallo Wereld
+say "Doe 't niet";    # Doe 't niet
+my $naam = 'Jan Jansen';
+say 'Hallo $naam';   # Hallo $naam
+say "Hallo $naam";   # Hallo Jan Jansen
+---------------------------------------
 
 == Operatoren
 
@@ -295,9 +295,9 @@ Onderstaande tabel toont de meest voorkomende operatoren.
 
 | >= | Infix | Numeriek groter dan of gelijk aan | 9 >= 7  | True
 
-| eq | Infix | String gelijk | "John" eq "John"  | True
+| eq | Infix | String gelijk | "Jan" eq "Jan"  | True
 
-| ne | Infix | String ongelijk | "John" ne "Jane"  | True
+| ne | Infix | String ongelijk | "Jan" ne "Jolanda"  | True
 
 | = | Infix | Toewijzing | my $var = 7  | Wijst de waarde `7` toe aan de variabele `$var`
 
@@ -417,12 +417,12 @@ Een scalar kan 1 waarde bevatten.
 [source,perl6]
 ----
 #String
-my $name = 'John Doe';
-say $name;
+my $naam = 'Jan Jansen';
+say $naam;
 
 #Integer
-my $age = 99;
-say $age;
+my $leeftijd = 99;
+say $leeftijd;
 ----
 
 Afhankelijk van het type waarde dat een scalar bevat, kun je daar bepaalde operaties op uitvoeren.
@@ -430,16 +430,16 @@ Afhankelijk van het type waarde dat een scalar bevat, kun je daar bepaalde opera
 [source,perl6]
 .String
 ----
-my $name = 'John Doe';
-say $name.uc;
-say $name.chars;
-say $name.flip;
+my $naam = 'Jan Jansen';
+say $naam.uc;
+say $naam.chars;
+say $naam.flip;
 ----
 
 ----
-JOHN DOE
-8
-eoD nhoJ
+JAN JANSEN
+10
+nesnaJ naJ
 ----
 
 NOTE: Bekijk https://docs.perl6.org/type/Str voor de complete lijst van methoden die men op een string kan uitvoeren.
@@ -447,8 +447,8 @@ NOTE: Bekijk https://docs.perl6.org/type/Str voor de complete lijst van methoden
 [source,perl6]
 .Integer
 ----
-my $age = 17;
-say $age.is-prime;
+my $leeftijd = 17;
+say $leeftijd.is-prime;
 ----
 
 ----
@@ -460,10 +460,10 @@ NOTE: Bekijk https://docs.perl6.org/type/Int voor de complete lijst van methoden
 [source,perl6]
 .Rational Number
 ----
-my $age = 2.3;
-say $age.numerator;
-say $age.denominator;
-say $age.nude;
+my $leeftijd = 2.3;
+say $leeftijd.numerator;
+say $leeftijd.denominator;
+say $leeftijd.nude;
 ----
 
 ----
@@ -553,7 +553,7 @@ Het is niet mogelijk om een vierde waarde aan dit array toe te voegen:
 my @array[3];
 @array[0] = "eerste waarde";
 @array[1] = "tweede waarde";
-@array[2] = "derde waarde
+@array[2] = "derde waarde";
 @array[3] = "vierde waarde";
 ----
 
@@ -1005,7 +1005,7 @@ with $var {
 
 `without` is de ontkennende versie van `with`.  Net als `unless` van `if`.
 
-Indien de eerste `with` niet waar is, dan kan men een alternatief bereik aangeven met `orwith`. +
+Als de eerste `with` niet waar is, dan kan men een alternatief bereik aangeven met `orwith`. +
 Je kunt `with` en `orwith` zien als een soort `if` en `elsif`.
 
 === for
@@ -1099,12 +1099,12 @@ Men kan `get` gebruiken om invoer van de terminal te krijgen.
 my $naam;
 
 say "Hoi, hoe heet je?";
-$name = get;
+$naam = get;
 
 say "Welkom bij Perl 6, beste $naam";
 ----
 
-Indien je bovenstaande code uitvoert zal de terminal wachten tot je je naam intypt en op [Enter] drukt.
+Als je bovenstaande code uitvoert zal de terminal wachten tot je je naam intypt en op [Enter] drukt.
 Vervolgens zal het je begroeten.
 
 ==== prompt
@@ -1155,10 +1155,10 @@ Maak een tekstbestand aan met de volgende inhoud:
 
 .scores.txt
 ----
-John 9
-Johnnie 7
-Jane 8
-Joanna 7
+Jan 9
+Japie 7
+Jolanda 8
+Jessica 7
 ----
 [source,perl6]
 ----
@@ -1237,7 +1237,7 @@ Bekijk onderstaand voorbeeld:
 [source,perl6]
 ----
 sub buitenaardse-groet {
-  say "Hallo aardlingen";
+    say "Hallo aardlingen";
 }
 
 buitenaardse-groet;
@@ -1247,119 +1247,120 @@ Het vorige voorbeeld laat een subroutine zien die geen invoer nodig heeft.
 
 === Signatuur
 Veel subroutines hebben een vorm van invoer nodig om hun werk te kunnen doen.  Die invoer wordt gegeven door *argumenten*.
-Het aantal en type van de 
-The number and type of arguments that this subroutine accepts is called its *signature*.
+Een subroutine mag 0 of meer *parameters* definieren.
+Het aantal en het type van de parameters die door een subroutine worden gedefinieerd, noemen we *signatuur*
 
-The below subroutine accepts a string argument.
+Onderstaande subroutine accepteert een string argument.
 
 [source,perl6]
 ----
-sub say-hello (Str $name) {
-    say "Hello " ~ $name ~ "!!!!"
+sub zeg-hallo (Str $naam) {
+    say "Hallo " ~ $naam ~ "!!!!"
 }
-say-hello "Paul";
-say-hello "Paula";
+zeg-hallo "Paul";
+zeg-hallo "Paula";
 ----
 
 === Multiple dispatch
-It is possible to define multiple subroutines having the same name but different signatures.
-When the subroutine is called, the runtime environment will decide which version to use depending on the number and type of the supplied arguments.
-This type of subroutines is defined the same way as normal subs with the exception of swapping the `sub` keyword with `multi`.
+Het is mogelijk om meer dan een subroutine met dezelfde naam, maar met een verschillende signatuur, te definieren.
+
+Op het moment dat de subroutine wordt aangeroepen, zal de uitvoerder besluiten welke versie van de subroutine werkelijk zal worden aangeroepen, afhankelijk van het aantal en het type van de gegeven argumenten.
+Dit soort subroutines wordt op dezelfde manier gedefinieerd als normale subroutines, maar in plaats van `sub` worden ze gedefinieerd met `multi`.
 
 [source,perl6]
 ----
-multi greet($name) {
-    say "Good morning $name";
+multi groet($naam) {
+    say "Good morning $naam";
 }
-multi greet($name, $title) {
-    say "Good morning $title $name";
+multi groet($naam, $titel) {
+    say "Good morning $titel $naam";
 }
 
-greet "Johnnie";
-greet "Laura","Mrs.";
+groet "Jan";
+groet "Laura","Mevr.";
 ----
 
-=== Default and Optional Arguments
-If a subroutine is defined to accept an argument, and we call it without providing it with the required argument, it will fail.
+=== Default end Optionele Parameters
+Als een siubroutine is gedefinieerd om een argument te acceptern en we roepen het aan zonder dat benodigde argument, dan zal er een fout optreden.
 
-Alternatively Perl 6 provides us the ability to define subroutines with:
+Als alternatief biedt Perl 6 de mogelijk om subroutines te definieren met:
 
-* Optional Arguments
-* Default Arguments
+* Optionele Parameters
+* Parameters met een default waarde
 
-Optional arguments are defined by appending `?` to the argument name.
+Je kunt een optionele parameter aangeven door een `?` achter de naam te plaatsen.
 
 [source,perl6]
 ----
-sub say-hello($name?) {
-  with $name { say "Hello " ~ $name }
-  else { say "Hello Human" }
+sub zeg-hallo($naam?) {
+    with $naam { say "Hallo " ~ $naam }
+    else { say "Hallo Mens" }
 }
-say-hello;
-say-hello("Laura");
+zeg-hallo;
+zeg-hallo("Laura");
 ----
 
-If the user doesn't supply an argument, it can default to a specific value. +
-This is done by assigning a value to the argument within the subroutine definition.
+Als de gebruiker een bepaald argument niet meegeeft, dan wordt de eventuele default waarde van de parameter gebruikt. +
+Dit wordt aangegeven door een waarde toe te wijzen aan de parameter in de definitie van de subroutine.
 
 [source,perl6]
 ----
-sub say-hello($name="Matt") {
-  say "Hello " ~ $name;
+sub zeg-hallo($naam="Mens") {
+    say "Hallo " ~ $naam;
 }
-say-hello;
-say-hello("Laura");
+zeg-hallo;
+zeg-hallo("Laura");
 ----
 
-=== Returning values
-All the subroutines we saw so far *do something*, they display some text on the terminal.
+=== Teruggeven van waarden
+Alle subroutines die we tot nu toe hebben gezien *doen iets* en laten dan het resultaat op het scherm zien.
 
-While this is perfectly normal, sometimes we do want a subroutine to *return* some kind of value that we can reuse later in the flow of our program.
+Ook al is dit heel normaal, soms willen we dat een subroutine een waarde *teruggeeft* dat we later in het programma kunnen gebruiken.
 
-Under normal circumstances, the last line of code of a subroutine is considered to be the return value.
+Onder normal omstandigheden is de waarde van de laatste regel van een subroutine de waarde die door de subroutine terug wordt gegeven.
 [source,perl6]
-.Implicit return
+.Impliciet teruggeven
 ----
-sub squared ($x) {
-  $x ** 2;
+sub kwadrateer ($x) {
+    $x ** 2;
 }
-say "7 squared is equal to " ~ squared(7);
+say "7 gekwadrateerd is gelijk aan " ~ kwadrateer(7);
 ----
 
-Once our code gets bigger, it might be a good idea to _explicitly_ specify what we do want to return.
-This can be done using the `return` keyword.
+Zodra je programma groter wordt, is het wellicht een goed idee om _expliciet_ aan te geven wat we terug willen geven.
+Dit kunnen we doen met het `return` sleutelwoord.
 [source,perl6]
-.Explicit return
+.Expliciete teruggave
 ----
-sub squared ($x) {
-  return $x ** 2;
+sub kwadrateer ($x) {
+    return $x ** 2;
 }
-say "7 squared is equal to " ~ squared(7);
+say "7 gekwadrateerd is gelijk aan " ~ kwadrateer(7);
 ----
-==== Restricting return values
-In one of the previous examples, we saw how we can restrict the accepted argument to be of a certain type.
-The same can be done with return values.
+==== Beperken van mogelijke teruggegeven waarden
+In een van de vorige voorbeelden hebben we gezien dat we parameters kunnen beperken tot een bepaald type.
+Hetzelfde kan worden gedaan met waarden die we teruggeven.
 
-To restrict the return value to a certain type, we either use the `returns` trait or the arrow notation `-\->` in the signature.
-
-[source,perl6]
-.Using the returns trait
-----
-sub squared ($x) returns Int {
-  return $x ** 2;
-}
-say "1.2 squared is equal to " ~ squared(1.2);
-----
+Om de teruggeven waarde te beperken tot een bepaald type kunnen we of de `returns` eigenschap gebruiken, of de pijlnotatie `-\->` in de signatuur gebruiken.
 
 [source,perl6]
-.Using the arrow
+.Gebruik van de returns eigenschap
 ----
-sub squared ($x --> Int) {
-  return $x ** 2;
+sub kwadrateer ($x) returns Int {
+    return $x ** 2;
 }
-say "1.2 squared is equal to " ~ squared(1.2);
+say "1.2 gekwadrateerd is gelijk aan " ~ kwadrateer(1.2);
 ----
-If we fail to provide a return value that matches the type constraint, an error will be thrown.
+
+[source,perl6]
+.Gebruik van de pijlnotatie
+----
+sub kwadrateer ($x --> Int) {
+    return $x ** 2;
+}
+say "1.2 gekwadrateerd is gelijk aan " ~ kwadrateer(1.2);
+----
+Als we niet een waarde voor teruggave van het juiste type aangeven, zal er een foutmelding worden geproduceerd.
 
 ----
 Type check failed for return value; expected Int but got Rat (1.44)
@@ -1367,157 +1368,157 @@ Type check failed for return value; expected Int but got Rat (1.44)
 
 [TIP]
 ====
-Not only can type constraints control the type of the return value; they can also control its definedness.
+We kunnen niet alleen de typebeperking van de teruggeven waarde controleren; we kunnen ook laten controleren of het gedefinieerd is.
 
-In the previous examples, we specified that the return value should be an `Int`, irrespective of its definedness.
-Alternatively we could have specified that the returned `Int` should be strictly defined or undefined using the following signatures: +
-`--> Int:D` and `--> Int:U`
+In het vorige voorbeeld gaven we aan dat de teruggegeven waarde een `Int` most zijn, zonder iets te zeggen over het wel of niet gedefinieerd zijn.
+We zouden ook hebben kunnen aangeven dat de teruggegeven `Int` wel of niet gedefinieerd moet zijn, met de volgende signaturen: +
+`--> Int:D` en `--> Int:U`
 
-That being said, it is good practice to use those type constraints. +
-Below is the modified version of the previous example that uses `:D` to force the returned  `Int` to be defined.
+Het is een goede gewoonte om dit soort typebeperkingen te gebruiken. +
+Hieronder is een aangepaste versie van het vorige voorbeeld die `:D` gebruikt om aan te geven dat de teruggegeven `Int` gedefinieerd moet zijn.
 
 [source,perl6]
 ----
-sub squared ($x --> Int:D) {
-  return $x ** 2;
+sub kwadrateer ($x --> Int:D) {
+    return $x ** 2;
 }
-say "1.2 squared is equal to " ~ squared(1.2);
+say "1.2 gekwadrateerd is gelijk aan " ~ kwadrateer(1.2);
 ----
 ====
 
-NOTE: For more info on subroutines and functions, see https://docs.perl6.org/language/functions
+NOTE: Zie https://docs.perl6.org/language/functions voor meer informatie over subroutines en functies.
 
-== Functional Programming
-In this chapter we will take a look at some of the functionality that facilitates Functional Programming.
+== Functioneel Programmeren
+In dit hoofdstuk gaan we kijken naar een aantal functionaliteiten die men kan gebruiken voor Functioneel Programmeren.
 
-=== Functions are first-class citizens
-Functions/subroutines are first-class citizens:
+=== Functies zijn ook objecten.
+Functies en subroutines zijn ook objecten, net als alle andere:
 
-* They can be passed as an argument
+* Ze kunnen worden doorgegeven als argument aan een subroutine
 
-* They can be returned from another function
+* Ze kunnen worden teruggegeven als waarde door een subroutine
 
-* They can be assigned to a variable
+* Ze kunnen worden toegekend aan een variabele
 
-A great example to demonstrate this concept is the `map` function. +
-`map` is a *higher order function*, it accepts another function as an argument.
+Een prachtig voorbeeld om dit concept te demonstreren is de `map` functie. +
+`map` is een zogenaamde *hogere orde functie*, want het accepteert een andere functie als argument.
 
 [source,perl6]
 .Script
 ----
 my @array = <1 2 3 4 5>;
-sub squared($x) {
-  $x ** 2
+sub kwadrateer($x) {
+    $x ** 2
 }
-say map(&squared,@array);
+say map(&kwadrateer,@array);
 ----
 
-.Output
+.Uitvoer
 ----
 (1 4 9 16 25)
 ----
 
-.Explanation
-We defined a subroutine called `squared`, it will take to the power of two any number provided as argument. +
-Next, we used `map`, a higher order function and gave it two arguments, a subroutine and an array. +
-The result is a list of all squared elements of the array.
+.Uitleg
+We hebben een subroutine `kwadrateer` gedefinieerd die het argument tot de tweede macht verheft. +
+Vervolgens hebben we `map` aangeroepen met twee argumenten: een subroutine en een array. +
+Het resultaat is dat alle elementen van het array zijn gekwadrateerd.
 
-Notice that when passing a subroutine as an argument, we need to prepend `&` to its name.
+Merk op dat als we een subroutine als argument willen doorgeven, we een `&` voor de naam moeten zetten.
 
-=== Closures
-All code objects in Perl 6 are closures, which means they can reference lexical variables from an outer scope.
+=== Closure
+Alle code objecten in Perl 6 zijn zogenaamde `closures`, hetgeen betekent dat ze kunnen refereren aan lokale variabelen die zichtbaar zijn buiten het directe eigen bereik.
 
-=== Anonymous functions
-An *anonymous function* is also called a *lambda*. +
-An anonymous function is not bound to an identifier (it has no name).
+=== Anonieme Functies
+Een *anonieme functie* wordt ook wel een *lambda* genoemd. +
+Een anonieme functie is niet bekend onder een naam (want die heeft het niet).
 
-Let's rewrite the `map` example using an anonymous function
+Laten we het `map` voorbeeld herschrijven met een anonieme functie
 [source,perl6]
 ----
 my @array = <1 2 3 4 5>;
 say map(-> $x {$x ** 2},@array);
 ----
-Notice that instead of declaring the subroutine and passing it as an argument to `map`, we defined it directly within. +
-The anonymous subroutine `\-> $x {$x ** 2}` has no handle and cannot be called.
+Merk op dat in plaats van een subroutine te declareren en het door middel van de naam als argument aan `map` door te geven, we het direct in de aanroep definieren. +
+De anonieme subroutine `\-> $x { $x ** 2 }` can niet als zodanig worden aangeroepen want het heeft geen naam.
 
-In Perl 6 parlance we call this notation  a *pointy block*
+In Perl 6 noemen we deze notatie een *pointy block*
 
 [source,perl6]
-.A pointy block may also be used to assign functions to variables:
+.Een pointy block kan ook aan een variabele worden toegekend:
 ----
-my $squared = -> $x {
-  $x ** 2
+my $kwadrateer = -> $x {
+    $x ** 2
 }
-say $squared(9);
+say $kwadrateer(9);
 ----
 
-=== Chaining
-In Perl 6, methods can be chained, you no longer have to pass the result of a method to another one as an argument.
+=== Aankoppelen
+In Perl 6 kun je methoden aan elkaar koppelen, zodat je niet langer het resultaat van de aanroep van de ene subroutine als een argument aan een andere hoeft te geven.
 
-Lets consider that you are provided with an array of values.
-You are asked to return the unique values of this array, sorted from biggest to smallest.
+Laten we het geval bekijken waarbij we een array met waarden kregen.
+Je wordt gevraagd om alle unieke (maar een keer voorkomende) waarden uit het array te halen en te sorteren van hoog naar laag.
 
-You might try to solve the problem by writing something close to this:
+Je zou dit probleem kunnen oplossen door iets te schrijven als:
 [source,perl6]
 ----
 my @array = <7 8 9 0 1 2 4 3 5 6 7 8 9>;
-my @final-array = reverse(sort(unique(@array)));
-say @final-array;
+my @resultaat = reverse(sort(unique(@array)));
+say @resultaat;
 ----
-First we call the `unique` function on `@array` then we pass the result as an argument to `sort` and then we pass the result of sorting to `reverse`.
+Eerst roepen we de `unique` functie aan op `@array`.  Het resultaat daarvan geven we als argument aan `sort` en dan geven we het resultaat daarvan door aan `reverse`.
 
-In contrast with the above example, chaining methods is allowed in Perl 6. +
-The above example can be written as following, taking advantage of *method chaining*:
+In tegenstelling tot bovenstaand voorbeeld mag je methodes aan elkaar koppelen in Perl 6. +
+Bovenstaand voorbeeld kan dus als volgt worden geschreven, waarbij we gebruik maken van het *aankoppelen van methoden* (method chaining):
 
 [source,perl6]
 ----
 my @array = <7 8 9 0 1 2 4 3 5 6 7 8 9>;
-my @final-array = @array.unique.sort.reverse;
-say @final-array;
+my @resultaat = @array.unique.sort.reverse;
+say @resultaat;
 ----
 
-You can already see that chaining methods is _easier on the eye_.
+Je kunt zien dat het aankoppelen van methoden _veel beter leest_.
 
-=== Feed Operator
-The *feed operator*, called _pipe_ in some functional programming languages, yields yet a better visualization of method chaining.
+=== Aanvoer Operator
+De *aanvoer operator*, ook wel _pipe_ genoemd in sommige functioneel programmeertalen, geeft een nog beter visualisatie van het aankoppelen van methoden.
 [source,perl6]
-.Forward Feed
+.Voorwaardse Aanvoer
 ----
 my @array = <7 8 9 0 1 2 4 3 5 6 7 8 9>;
 @array ==> unique()
        ==> sort()
        ==> reverse()
-       ==> my @final-array;
-say @final-array;
+       ==> my @resultaat;
+say @resultaat;
 ----
 
-.Explanation
+.Uitleg
 ----
-Start with `@array` then return a list of unique elements
-                    then sort it
-                    then reverse it
-                    then store the result in @final-array
+Start met `array` en geef een lijst van unieke elementen
+                  en sorteer dat
+                  en keer de volgorde om
+                  en sla het resultaat daarvan op in @resultaat
 ----
-As you can see the flow of the method calls is top-down.
+Zoals je kunt zien is de volgorde van de aanroepen van de methoden van voor naar achter.
 
 
 [source,perl6]
-.Backward Feed
+.Achterwaardse Aanvoer
 ----
 my @array = <7 8 9 0 1 2 4 3 5 6 7 8 9>;
-my @final-array-v2 <== reverse()
-                   <== sort()
-                   <== unique()
-                   <== @array;
-say @final-array-v2;
+my @resultaat <== reverse()
+              <== sort()
+              <== unique()
+              <== @array;
+say @resultaat;
 ----
 
-.Explanation
-The backward feed is like the forward feed, but written in reverse. +
-The flow of the method calls is bottom-up.
+.Uitleg
+De achterwaardse aanvoer is net als de voorwaardse aanvoer, maar dan andersom. +
+De volgorde van de aanroepen van de methoden is van achteren naar voren.
 
-=== Hyper operator
-The *hyper operator* `>>.` will call a method on all elements of a list and return a list of all results.
+=== Hyper Operator
+De *hyper operator* `>>.` roept de methode aan op elke element van een lijst en geeft een lijst terug met het resultaat van die aanroepen.
 [source,perl6]
 ----
 my @array = <0 1 2 3 4 5 6 7 8 9 10>;
@@ -1527,243 +1528,247 @@ say @array>>.is-prime;
 say @array>>.&is-even;
 ----
 
-Using the hyper operator we can call methods already defined in Perl 6, e.g. `is-prime` that tells us if a number is prime or not. +
-In addition we can define new subroutines and call them using the hyper operator. In this case we have to prepend `&` to the name of the method. E.g. `&is-even`
+Met de hyper operator kunnen we methoden aanroepen die standaar al in Perl 6 zijn gedefinieerd, zoals `is-prime` dat ons vertelt of een getal een priemgetal is of niet. +
+Daarnaast kun je nieuwe subroutines definieren en ze aanroepen met de hyper operator.  In dat geval moeten we een `&` voor de naam plaatsen, bijvoorbeeld `is-even`
 
-This is very practical as it relieves us from writing a `for` loop to iterate over each value.
+Dit is erg practisch want daardoor hoeven we geen `for` lus te schrijven om over elk element te itereren.
 
-=== Junctions
-A *junction* is a logical superposition of values.
+WARNING: Perl 6 garandeert dat de volgorde van de resultaten hetzelfde is als de volgorde van de originele waarden. +
+Maar er is *geen garantie* dat Perl 6 de methoden in de zelfde volgorde of in dezelfde thread zal uitvoeren. +
+Men moet dus voorzichtig zijn bij het aanroepen van methoden met neveneffecten, zoals `say` (waarbij het neveneffect het tonen van de waarden is).
 
-In the below example `1|2|3` is a junction.
+=== Juncties
+Een *junctie* is een logische superpositie van waarden.
+
+In onderstaand voorbeeld is `1|2|3` een junctie.
 [source,perl6]
 ----
 my $var = 2;
 if $var == 1|2|3 {
-  say "The variable is 1 or 2 or 3"
+    say "De variabele is 1 of 2 of 3"
 }
 ----
-The use of junctions usually triggers *autothreading*;
-the operation is carried out for each junction element, and all the results are combined into a new junction and returned.
+Het gebruik van juncties zorgt meestal voor zogenaamde *autothreading*;
+een opdracht wordt voor elk element van de junctie uitgevoerd en de resultaten daarvan worden in een nieuwe junctie opgeslagen en teruggegeven.
 
-=== Lazy Lists
-A *lazy list* is a list that is lazily evaluated. +
-Lazy evaluation delays the evaluation of an expression until required, and avoids repeating evaluations by storing results in a lookup table.
+=== Luie Lijsten
+Een *luie lijst* is een lijst die lamlendig wordt geevalueerd. +
+Lamlendig evalueren stelt de evaluatie van een expressie uit totdat deze echt nodig is en probeert herhaalde evaluaties te voorkomen door resultaten op te slaan.
 
-The benefits include:
+De voordelen zijn:
 
-* Performance increase by avoiding needless calculations
+* Verbeterde prestaties doordat onnodige berekening worden vermeden
 
-* The ability to construct potentially infinite data structures
+* De mogelijkheid om potentieel oneindige datastructuren aan te maken
 
-* The ability to define control flow
+* De mogelijkheid om de besturingsstroom te definieren
 
-To build a lazy list we use the infix operator `...` +
-A lazy list has *initial element(s)*, a *generator* and an *endpoint*.
-
-[source,perl6]
-.Simple lazy list
-----
-my $lazylist = (1 ... 10);
-say $lazylist;
-----
-The initial element is 1 and the endpoint is 10. No generator was defined so the default generator is the successor (+1) +
-In other words this lazy list may return (if requested) the following elements (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+Om een luie lijst te maken gebruiken we de `...` infix operator. +
+Een luie lijst heeft een of meer *startelementen*, een *generator* en een *eindpunt*.
 
 [source,perl6]
-.Infinite lazy list
+.Simpele luie lijst
 ----
-my $lazylist = (1 ... Inf);
-say $lazylist;
+my $luielijst = (1 ... 10);
+say $luielijst;
 ----
-This list may return (if requested) any integer between 1 and infinity, in other words any integer number.
+Het start element is 1 en het eindpunt is 10.  Er is geen generator aangegeven, dus de default generator wordt gebruikt (+1). +
+In andere woorden, deze luie lijst zal de volgende waarden teruggeven (indien daarom wordt gevraagd): (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
 [source,perl6]
-.Lazy list built using a deduced generator
+.Oneindige luie lijst
 ----
-my $lazylist = (0,2 ... 10);
-say $lazylist;
+my $luielijst = (1 ... Inf);
+say $luielijst;
 ----
-The initial elements are 0 and 2 and the endpoint is 10.
-No generator was defined, but using the initial elements, Perl 6 will deduce that the generator is (+2) +
-This lazy list may return (if requested) the following elements (0, 2, 4, 6, 8, 10)
+Deze luie lijst kan een getal tussen 1 en oneindig geven, in andere woorden alle natuurlijke getallen.
 
 [source,perl6]
-.Lazy list built using a defined generator
+.Luie lijst met een afgeleide generator
 ----
-my $lazylist = (0, { $_ + 3 } ... 12);
-say $lazylist;
+my $luielijst = (0,2 ... 10);
+say $luielijst;
 ----
-In this example, we defined explicitly a generator enclosed in `{ }` +
-This lazy list may return (if requested) the following elements (0, 3, 6, 9, 12)
+The startelementen zijn 0 en 2 en het eindpunt is 10.
+Er is geen generator aangegeven, maar door de aangegeven startelementen kan Perl 6 deduceren dat de generator (+2) is +
+Deze luie lijst zal de volgende waarden teruggeven (indien daarom wordt gevraagd): (0, 2, 4, 6, 8, 10)
+
+[source,perl6]
+.Luie lijst met een specifieke generator
+----
+my $luielijst = (0, { $_ + 3 } ... 12);
+say $luielijst;
+----
+In dit voorbeeld specificeren we expliciet een generator tussen `{ }` +
+Deze luie lijst zal de volgende waarden teruggeven (indien daarom wordt gevraagd): (0, 3, 6, 9, 12)
 
 [WARNING]
 ====
-When using an explicit generator, the endpoint must be one of the values that the generator can return. +
-If we reproduce the above example with the endpoint being 10 instead of 12, it will not stop.
-The generator _jumps over_ the endpoint.
+Indien men een expliciete generator specificeert moet het eindpunt een van de waarden zijn die door de generator terug kan worden gegeven. +
+Als we in bovenstaand voorbeeld het eindpunt vervangen door 10 in plaats van 12, dan zal de generator nooit stoppen.
+De generator springt dan _over_ het eindpunt.
 
-Alternatively you can replace `0 ... 10` with `0 ...^ * > 10` +
-You can read it as: From 0 until the first value greater than 10 (excluding it)
+In plaats van `0 ...^ * > 10` kun je ook `0 ... 10` schrijven +
+Je kunt dat lezen als: vanaf 0 tot de eerste waarde die groter is dan 10 (maar sluit die dan uit)
 [source,perl6]
-.This will not stop the generator
+.Deze generator zal nooit stoppen
 ----
-my $lazylist = (0, { $_ + 3 } ... 10);
-say $lazylist;
+my $luielijst = (0, { $_ + 3 } ... 10);
+say $luielijst;
 ----
 
 [source,perl6]
-.This will stop the generator
+.Deze generator zal wel stoppen
 ----
-my $lazylist = (0, { $_ + 3 } ...^ * > 10);
-say $lazylist;
+my $luielijst = (0, { $_ + 3 } ...^ * > 10);
+say $luielijst;
 ----
 ====
 
-== Classes & Objects
-In the previous chapter, we learned how Perl 6 facilitates Functional Programming. +
-In this chapter we will take a look at Object Oriented programming in Perl 6.
+== Klassen en Objecten
+In het vorige hoofdstuk hebben we geleerd hoe Perl 6 het gemakkelijker maakt om Functioneel te Programmeren. +
+In dit hoofdstuk gaan we kijken naar het object georienteerd programmeren in Perl 6.
 
 === Inleiding
 
-_Object Oriented_ programming is one of the widely used paradigms nowadays. +
-An *object* is a set of variables and subroutines bundled together. +
-The variables are called *attributes* and the subroutines are called *methods*. +
-Attributes define the *state* and methods define the *behavior* of an object.
+_Object Georienteerd_ Programmeren is een van de programmeerstijl paradigma's die tegenwoordig veel wordt gebruikt. +
+Een *object* is een verzameling van variabelen en subroutines die bij elkaar gevoegd zijn. +
+De variabelen noemen we *attributen* en de subroutines noemen we *methoden*. +
+Attributen bepalen de *staat* van een object, methoden bepalen het *gedrag* van het object.
 
-A *class* defines the structure of a set of *objects*. +
+Een *klasse* definieert de structuur van een verzameling *objecten*. +
 
-In order to understand the relationship consider the below example:
-
-|===
-
-| There are 4 people present in a room | *objects* => 4 people
-
-| These 4 people are humans | *class* => Human
-
-| They have different names, age, sex and nationality | *attributes* => name, age, sex, nationality
+Bijkijk onderstaand voorbeeld om deze relatie beter te begrijpen:
 
 |===
 
-In _object oriented_ parlance, we say that objects are *instances* of a class.
+| Er bevinden zich 4 personen in een kamer | *objecten* => 4 personen
 
-Consider the below script:
+| Deze 4 personen zijn menselijk | *klasse* => Mens
+
+| Ze hebben een allen een naam, leeftijd, geslacht en nationaliteit | *attributen* => naam, leeftijd, geslacht en nationaliteit
+
+|===
+
+In het taalgebruik van _object georienteerd_ programmeren zeggen we dat de objecten *instanties* zijn van een klasse.
+
+Bekijk het onderstaande script:
 [source,perl6]
 ----
-class Human {
-  has $name;
-  has $age;
-  has $sex;
-  has $nationality;
+class Mens {
+    has $naam;
+    has $leeftijd;
+    has $geslacht;
+    has $nationaliteit;
 }
 
-my $john = Human.new(name => 'John', age => 23, sex => 'M', nationality => 'American');
-say $john;
+my $jan = Mens.new(naam => 'Jan', leeftijd => 23, sex => 'M', nationaliteit => 'Nederlands');
+say $jan;
 ----
-The `class` keyword is used to define a class. +
-The `has` keyword is used to define attributes of a class. +
-The `.new()` method is called a *constructor*. It creates the object as an instance of the class it has been called on.
+Met het `class` sleutelwoord definieert men een klasse. +
+Met het `has` sleutelwoord definieert men een attribuut van een klasse. +
+De `.new()` methode wordt een *constructeur* genoemd.  Het maakt een object als een instantie van de klasse waarop het wordt aangeroepen.
 
-In the above script, a new variable `$john` holds a reference to a new instance of "Human" defined by `Human.new()`. +
-The arguments passed to the `.new()` method are used to set the attributes of the underlying object.
+In het bovenstaande script, bevat de variabele `$jan` de nieuwe instantie van "Mens" aangemaakt met `Mens.new()`. +
+De argumenten op naam die we aan de `.new()` methode meegeven, worden gebruikt om de attributen van het nieuwe object te initialiseren.
 
-A class can be given _lexical scope_ using `my`:
+We kunnen een klasse ook een _lexicaal gebied_ geven door middel van `my`:
 [source,perl6]
 ----
-my class Human {
+my class Mens {
 
 }
 ----
 
-=== Encapsulation
-Encapsulation  is an object oriented concept that bundles a set of data and methods together. +
-The data (attributes) within an object should be *private*, in other words, accessible only from within the object. +
-In order to access the attributes from outside the object we use methods that we call *accessors*.
+=== Inkapseling
+Inkapseling is een concept uit het object georienteerd programmeren waarmee we de bundeling van data en methoden aangeven. +
+De gegevens (attributen) binnen een object zouden *prive* moeten zijn.  In andere woorden, alleen maar toegankelijk vanaf binnen in het object. +
+Om toegang te verlenen aan de attributen vanaf buiten het object, gebruiken we methoden die we *accessors* noemen.
 
-The below two scripts have the same result.
+Onderstaande scripts geven hetzelfde resultaat.
 
-.Direct access to the variable:
+.Directe toegang tot een variabele
 [source,perl6]
 ----
 my $var = 7;
 say $var;
 ----
 
-.Encapsulation:
+.Inkapseling
 [source,perl6]
 ----
 my $var = 7;
-sub sayvar {
-  $var;
+sub geef-var {
+    $var;
 }
-say sayvar;
+say geef-var;
 ----
-The method `sayvar` is an accessor. It let us access the value of the variable without getting direct access to it.
+De subroutine `geef-var` kan men als een accessor beschouwen.  Het maakt het mogelijk om aan de waarde van de variabele te komen zonder er direct toegang daarvoor nodig te hebben.
 
-Encapsulation is facilitated in Perl 6 with the use of *twigils*. +
-Twigils are secondary _sigils_. They come between the sigil and the attribute name. +
-Two twigils are used in classes:
+Inkapseling wordt in Perl 6 mogelijk gemaakt door middel van zogenaamde *twigils*. +
+Twigils zijn secondaire _sigils_.  Ze worden tussen de sigil en de naam van het attribuut geplaatst. +
+Bij klassen kunnen twee sigils worden gebruikt:
 
-* `!` is used to explicitly declare that the attribute is private.
-* `.` is used to automatically generate an accessor for the attribute.
+* `!` om aan te geven dat een attribuut prive is.
+* `.` om aan te geven dat een accessor voor de attribuut aangemaakt moet worden.
 
-By default, all attributes are private but it is a good habit to always use the `!` twigil.
+Als men geen twigil meegeeft, is een attribuut prive.  Voor de leesbaarheid is het een goede gewoonte om in zo'n geval altijd de `!` twigil te gebruiken.
 
-In line with what we said we should rewrite the above class as following:
+Met wat we zojuist gezien hebben, zouden we bovenstaande klasse moeten herschrijven als:
 [source,perl6]
 ----
-class Human {
-  has $!name;
-  has $!age;
-  has $!sex;
-  has $!nationality;
+class Mens {
+    has $!naam;
+    has $!leeftijd;
+    has $!geslacht;
+    has $!nationaliteit;
 }
 
-my $john = Human.new(name => 'John', age => 23, sex => 'M', nationality => 'American');
-say $john;
+my $jan = Mens.new(naam => 'Jan', leeftijd => 23, sex => 'M', nationaliteit => 'Nederlands');
+say $jan;
 ----
-Append to the script the following statement: `say $john.age;` +
-It will return the following error: `Method 'age' not found for invocant of class 'Human'` +
-The reason being that `$!age` is private and can only be used within the object.
-Trying to access it outside the object will return an error.
+Voeg het volgende commando to: `say $jan.leeftijd` +
+Het zal de volgende fout geven: `Method 'leeftijd' not found for invocant of class 'Mens'` +
+De reden hiervoor is dat `$!leeftijd` prive is en daardoor alleen maar binnen het object gebruikt kan worden.
+Pogingen om aan het attribuut te komen van buiten het object zal je een foutmelding geven.
 
-Now replace `has $!age` with `has $.age` and see what will be the result of `say $john.age;`
+Vervang nu `has $!leeftijd` with `has $.leeftijd` en bekijk dan het resultaat van `say $jan.leeftijd;`
 
-=== Named vs. Positional Arguments
-In Perl 6, all classes inherit a default `.new()` constructor. +
-It can be used to create objects by providing it with arguments. +
-The default constructor can only be provided with *named arguments*. +
-If you consider the above example, you'll remark that all the arguments supplied to `.new()` are defined by name:
+=== Argumenten op naam vs. argumenten op positie
+Alle klassen hebben beschikking over een `.new()` constructor` door overerving. +
+Het kan worden gebruikt om objecten aan te maken door het argumenten te geven. +
+De default constructeur accepteert alleen *argumentn op naam*. +
+Als je bovenstaande voorbeelden bekijkt, dan zul je zien dat alle argumenten die we aan `.new()` hebben gegeven, op naam zijn:
 
-* name => 'John'
+* naam => 'Jan'
 
-* age => 23
+* leeftijd => 23
 
-
-What if i do not want to supply the name of each attribute each time i want to create a new object? +
-Then I need to create another constructor that accepts *positional arguments*.
+Wat indien ik niet telkens de naam van elk attribuut wil meegeven als ik een nieuw object wil maken? +
+In dat geval moeten we een andere constructeur maken die *argumenten op positie* accepteert.
 
 [source,perl6]
 ----
-class Human {
-  has $.name;
-  has $.age;
-  has $.sex;
-  has $.nationality;
-  #new constructor that overrides the default one.
-  method new ($name,$age,$sex,$nationality) {
-    self.bless(:$name,:$age,:$sex,:$nationality);
-  }
+class Mens {
+    has $.naam;
+    has $.leeftijd;
+    has $.geslacht;
+    has $.nationaliteit;
+    #nieuwe constructeur die de default constructeur vervangt voor deze klasse
+    method new ($naam,$leeftijd,$geslacht,$nationaliteit) {
+        self.bless(:$naam,:$leeftijd,:$geslacht,:$nationaliteit);
+    }
 }
 
-my $john = Human.new('John',23,'M','American');
-say $john;
+my $jan = Human.new('Jan',23,'M','Nederlands');
+say $jan;
 ----
 
-=== Methods
+=== Methoden
 
 ==== Inleiding
-Methods are the _subroutines_ of an object. +
+Methoden zijn de _subroutines_ van een object. +
+Net als subroutines
 Like subroutines, they are a means of packaging a set of functionality, they accept *arguments*, have a *signature* and can be defined as *multi*.
 
 Methods are defined using the `method` keyword. +
@@ -1773,105 +1778,104 @@ The outside world, can only interact with the object methods, and has no access 
 
 [source,perl6]
 ----
-class Human {
-  has $.name;
-  has $.age;
-  has $.sex;
-  has $.nationality;
-  has $.eligible;
-  method assess-eligibility {
-      if self.age < 21 {
-        $!eligible = 'No'
-      } else {
-        $!eligible = 'Yes'
-      }
-  }
-
+class Mens {
+    has $.naam;
+    has $.leeftijd;
+    has $.geslacht;
+    has $.nationaliteit;
+    has $.geschiktheid;
+    method bepaal-geschiktheid
+        if self.leeftijd < 21 {
+            $!geschiktheid = 'Nee'
+        } else {
+            $!geschiktheid = 'Ja'
+        }
+    }
 }
 
-my $john = Human.new(name => 'John', age => 23, sex => 'M', nationality => 'American');
-$john.assess-eligibility;
-say $john.eligible;
+my $jan = Mens.new(naam => 'Jan', leeftijd => 23, geslacht => 'M', nationaliteit => 'Nederlands');
+$jan.bepaal-geschiktheid;
+say $jan.geschiktheid;
 ----
 
-Once methods are defined within a class, they can be called on an object using the _dot notation_: +
-_object_ *.* _method_ or as in the above example: `$john.assess-eligibility`
+Door een methode te definieren in een klasse, kun je deze aanroepen op een object met de _punt notatie_: +
+_object_ *.* _methode_ of als in bovenstaand voorbeeld: `$jan.bepaal-geschiktheid`
 
-Within the definition of a method, if we need to reference the object itself to call another method we use the `self` keyword. +
+Binnen de definitie van een methode kunnen we het sleutelwoord `self` gebruiken om te refereren aan het object zelf om een andere methode aan te roepen. +
 
-Within the definition of a method, if we need to reference an attribute we use `!` even if it was defined with `.` +
-The rationale being that what the `.` twigil does is declare an attribute with `!` and automate the creation of an accessor.
+Binnen de definitie van een methode kunnen we direct een attribuut gebruiken door de `!` twigil te gebruiken, zelfs als het attribuut is gedefinieerd met de `.` twigil. +
+De reden daarachter is dat wat de `.` twigil doet is een attribuut met `!` te definieren en automatisch te zorgen voor het aanmaken van een accessor.
 
-In the above example `if self.age < 21` and `if $!age < 21` would have the same effect, although they are technically different:
+In bovenstaand voorbeeld hebben `if self.leeftijd < 21` en `if $!leeftijd < 21` hetzelfde effect, maar technisch gezien zijn ze verschillend:
 
-* `self.age` calls the `.age` method (accessor) +
-Can be written alternatively as `$.age`
-* `$!age` is a direct call to the variable
+* `self.leeftijd` roept de `.leeftijd` methode (accessor) aan +
+Hetgeen overigens ook geschreven can worden als `$.leeftijd`
+* `$!leeftijd` is een directe toegang tot de variabele
 
-==== Private methods
-Normal methods can be called on objects from outside the class.
+==== Prive methoden
+Normale methoden kunnen op objecten buiten de klasse zelf worden aangeroepen.
 
-*Private methods* are methods that can only be called from within the class. +
-A possible use case would be a method that calls another one for specific action.
-The method that interfaces with the outside world is public while the one referenced should stay private.
-We do not want users to call it directly, so we declare it as private.
+*Prive methoden* zijn methoden die alleen maar kunnen worden aangeroepen binnen een klasse. +
+Dit kan bijvoorbeeld gebruikt worden als een methode een andere methode moet aanroepen voor een specifieke actie.
+De methode die gebruikt kan worden vanaf de buitenwereld is publiek, terwijl de andere methode onzichtbaar moet blijven.
+Aangezien we niet willen dat gebruikers die methode direct kunnen aanroepen, definieren we het als een prive methode.
 
-The declaration of a private method requires the use of the `!` twigil before its name. +
-Private methods are called with `!` instead of `.`
+Door een `!` voor de naam van een methode te plaatsen, geven we aan dat het om een prive methode gaat.
+Prive methoden moeten worden aangeroepen met een `!` in plaats van met `.`
 
 [source,perl6]
 ----
-method !iamprivate {
-  #code goes in here
+method !ikbenprive {
+    #code waar het over gaat
 }
 
-method iampublic {
-  self!iamprivate;
-  #do additional things
+method ikbenprive {
+  self!ikbenprive;
+  #doe extra dingen
 }
 ----
 
-=== Class Attributes
+=== Klasse Attributen
 
-*Class attributes* are attributes that belong to the class itself and not to its objects. +
-They can be initialized during definition. +
-Class attributes are declared using `my` instead of `has`. +
-They are called on the class itself instead of its objects.
+*Klasse Attributen* zijn attributen die bij de klasse zelf horen en niet bij de objecten van die klasse. +
+Zij kunnen worden geinitialiseerd bij de definitie. +
+Klasse attributen worden gedefinieerd met `my` in plaats van met `has`. +
+Zij worden aangeroepen op de klasse zelf in plaats van op haar objecten.
 
 [source,perl6]
 ----
-class Human {
-  has $.name;
-  my $.counter = 0;
-  method new($name) {
-    Human.counter++;
-    self.bless(:$name);
-  }
+class Mens {
+    has $.naam;
+    my $.aantal = 0;
+    method new($naam) {
+        Mens.aantal++;
+        self.bless(:$naam);
+    }
 }
-my $a = Human.new('a');
-my $b = Human.new('b');
+my $a = Mens.new('a');
+my $b = Mens.new('b');
 
-say Human.counter;
+say Mens.aantal;
 ----
 
-=== Access Type
-Until now all the examples that we've seen, used accessors to get information from the objects' attributes.
+=== Toegangssoorten
+In alle voorbeelden die we tot nu toe hebben gezien, hebben we accessors alleen maar gebruikt om informatie uit een object te halen.
 
-What if we need to modify the value of an attribute? +
-We need to label it as _read/write_ using the following keywords `is rw`
+Maar wat nu als we de waarde van een attribuut willen veranderen? +
+In dat geval moeten we die attribuut als _lees/schrijf_ markeren met de sleutelwoorden `is rw` (read/write)
 [source,perl6]
 ----
-class Human {
-  has $.name;
-  has $.age is rw;
+class Mens {
+    has $.naam;
+    has $.leeftijd is rw;
 }
-my $john = Human.new(name => 'John', age => 21);
-say $john.age;
+my $jan = Mens.new(naam => 'Jann', leeftijd => 21);
+say $jan.leeftijd;
 
-$john.age = 23;
-say $john.age;
+$jan.leeftijd = 23;
+say $jan.leeftijd;
 ----
-By default, all attributes are declared as _read only_ but you can explicitly do it using `is readonly`
+Als je bij de definitie niets aangeeft, wordt een attribuut als _alleen lezen_ gedefinieerd, maar je kunt ook expliciet `is readonly` aangeven
 
 === Inheritance
 ==== Inleiding
