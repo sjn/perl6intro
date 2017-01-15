@@ -59,8 +59,8 @@ Perl6はマルチパラダイム言語です。手続き型、オブジェクト
 仕様に基づいたテストスイートを通るような実装はPerl6と考えられます。
 * *Rakudo* : はPerl6のためのコンパイラです。
 * *Rakudobrew* : はRakudoのためのインストール管理ツールです。
-* *Panda* : はPerl6のモジュールのインストーラーです。
-* *Rakudo Star*: はRakudo, Panda, Perl6のモジュールのコレクション, 文書を含んだバンドルソフトです。
+* *Zef* : はPerl6のモジュールのインストーラーです。
+* *Rakudo Star*: はRakudo, Zef, Perl6のモジュールのコレクション, 文書を含んだバンドルソフトです。
 
 === Perl6のインストール
 .Linux
@@ -68,7 +68,11 @@ Perl6はマルチパラダイム言語です。手続き型、オブジェクト
 
 . Rakudoのインストール: 次のコマンドをターミナルで打ってください `rakudobrew build moar`
 
-. Pandaのインストール: 次のコマンドをターミナルで打ってください `rakudobrew build panda`
+. Zefのインストール: 次のコマンドをターミナルで打ってください `rakudobrew build zef`
+
+. Rakudo Starに含まれるモジュールのためのメタパッケージであるTask::Starのインストール: 次のコマンドをターミナルで打ってください `zef install Task::Star`
+
+他のインストール方法を知りたければ次のリンクを参照してください。 http://rakudo.org/how-to-get-rakudo/#Installing-Rakudo-Star-Linux
 
 .OSX
 四つの選択肢から選んでください:
@@ -114,9 +118,9 @@ Rakudo StarはREPLを使い倒すためのラインエディタをバンドル�
 もしRakudo Starではなく無印のRakudoをインストールしたのなら、行編集機能を有効化(履歴閲覧のための上矢印キーと下矢印キーの使用、入力編集のための左矢印キーと右矢印キーの使用、タブによる補完機能)していないはずです。
 次のコマンドを実行してこれらの機能を有効化することを考えてみてください。:
 
-* `panda install Linenoise` Windows/Linux/OSXで動きます
+* `zef install Linenoise` Windows/Linux/OSXで動きます
 
-* `panda install Readline` もしLinux環境で _Readline_ ライブラリを使いたいのであれば
+* `zef install Readline` もしLinux環境で _Readline_ ライブラリを使いたいのであれば
 --
 
 === エディタ
@@ -125,7 +129,7 @@ Rakudo StarはREPLを使い倒すためのラインエディタをバンドル�
 
 私が個人的に使っていておすすめのエディタは https://atom.io/[Atom] です。
 モダンなテキストエディタであり、革新的なPerl6のシンタックスハイライティング機能を持っています。
-別の選択肢として、 https://atom.io/packages/language-perl6fe[Perl6-fe] というAtomのためのシンタックスハイライターがあります。
+別の選択肢として、 https://atom.io/packages/language-perl6[Perl 6 FE] というAtomのためのシンタックスハイライターがあります。
 オリジナルのパッケージから派生したものですが、多くのバグフィックスと追加機能を含んでいます。
 
 http://www.vim.org/[Vim], https://www.gnu.org/software/emacs/[Emacs], http://padre.perlide.org/[Padre] もまた、Perl6コミュニティの他の人々によって使われています。
@@ -530,9 +534,9 @@ We're going to let go: vicuña llama and keep the camel
 
 .説明
 `.elems` は配列の中の要素数を返します。 +
-`.push()` は配列に要素を一つ追加します。 +
+`.push()` は配列に一つかそれ以上の要素を追加します。 +
 配列の中の特定の要素の位置を指定することで、その要素にアクセスすることができます。 `@animals[0]` +
-`.pop` は配列から最後の要素を削除します。 +
+`.pop` は配列から最後の要素を削除し、そしてそれを返します。 +
 `.splice(a,b)` は位置 `a` から始まる `b` 個の要素を削除します。
 
 ==== 固定サイズの配列
@@ -790,7 +794,7 @@ Perl6のブロックは `{ }` で囲まれます。
 say $var; # はアクセス可能ではありません。エラーを返します。
 ----
 
-変数はその変数が定義されたブロックの中でのみアクセスが可能なので、別のブロックでは同じ変数名で再定義できます。
+変数はその変数が定義されたブロックの中でのみアクセスが可能なので、別のブロックでは同じ変数名で使用できます。
 
 [source,perl6]
 ----
@@ -1029,6 +1033,7 @@ for @array -> $array-item {
 === given
 
 `given` は他の言語においてswitch命令と呼ばれているものと等価なPerl6の命令です。
+しかし、他の言語よりも強力です。
 
 [source,perl6]
 ----
@@ -1250,7 +1255,8 @@ alien-greeting;
 
 === シグネチャ
 多くのサブルーチンでは、それを実行するために入力が必要になる場合があります。この時の入力は *引数* によって与えられます。
-また、サブルーチンが受け取る引数の数や型は *シグネチャ* と呼ばれます。
+サブルーチンはゼロかそれ以上の *パラメータ* を定義します。
+サブルーチンが定義するパラメータの数と型は *シグネチャ* と呼ばれています。
 
 下記のサブルーチンは引数として文字列を受け取っています。
 
@@ -1281,15 +1287,15 @@ greet "Johnnie";
 greet "Laura","Mrs.";
 ----
 
-=== デフォルト引数とオプション引数
+=== デフォルトパラメータとオプションパラメータ
 もしサブルーチンが一つの引数を受け取るように定義されていて、必要となる引数が与えられずに呼び出されたのなら、このサブルーチンの実行は失敗します。
 
 その代わりにPerl6では次のような引数をともなったサブルーチンを定義することができます:
 
-* オプション引数
-* デフォルト引数
+* オプションパラメータ
+* デフォルトパラメータ
 
-オプション引数は引数の名前に対して `?` を付加することで定義できます。
+オプションパラメータはパラメータの名前に対して `?` を付加することで定義できます。
 
 [source,perl6]
 ----
@@ -1302,7 +1308,7 @@ say-hello("Laura");
 ----
 
 ユーザーが引数を与えていない場合に備えて、その引数の値を特定の値にしておくことができます。 +
-これは、サブルーチンの定義内で引数に対して値を代入することで行うことができます。
+これは、サブルーチンの定義内でパラメータに対して値を代入することで行うことができます。
 
 [source,perl6]
 ----
@@ -1426,9 +1432,6 @@ say map(&squared,@array);
 
 引数としてサブルーチンを用いるときはその名前の前に `&` をつけなければならないことに注意してください。
 
-=== クロージャ
-Perl6のすべてのCode型のオブジェクトはクロージャです。これは外のスコープのレキシカル変数を参照できるということを意味しています。
-
 === 無名関数
 *無名関数* は *ラムダ* とも呼ばれています。 +
 
@@ -1537,6 +1540,10 @@ say @array>>.&is-even;
 
 配列に対して反復処理を行うための `for` によるループを書くことから脱却することができ、とても実用的です。
 
+WARNING: Perl6は元の値の並びと結果の値の並びが同じになることを保証するでしょう。 +
+ただし、 Perl6がもとの並びと同じ順番や同じスレッドで実際にメソッドを呼び出しているという *保証はない* です。
+そのため、副作用を持つメソッド、例えば `say` (ここでの副作用は値を表示することです) には注意してください。
+
 === ジャンクション
 *ジャンクション* は値の論理的な重ね合わせです。
 
@@ -1626,6 +1633,59 @@ say $lazylist;
 ----
 ====
 
+=== クロージャ
+Perl6のすべてのCode型のオブジェクトはクロージャです。これは外のスコープのレキシカル変数を参照できるということを意味しています。
+
+[source,perl6]
+----
+sub generate-greeting {
+    my $name = "John Doe";
+    sub greeting {
+      say "Good Morning $name";
+    };
+    return &greeting;
+}
+my $generated = generate-greeting;
+$generated();
+----
+
+もし上記のコードを動かしたのなら、 `Good Morning John Doe` とターミナルに表示されたはずです。
+非常に単純な結果でしたが、この例で面白いところは、中の `greeting` というサブルーチンが、それが実行される前に外のサブルーチンから返されているということです。
+
+`$generated` は *クロージャ* になったのです。
+
+*クロージャ* は二つのものを結びつけた特別な種類のオブジェクトです:
+
+* サブルーチン
+
+* サブルーチンの生成された環境
+
+環境は、そのクロージャが生成されたときにスコープ内にあったすべてのローカル変数で構成されています。
+この場合、 `$generated` はサブルーチン `greeting` と文字列 `John Doe` の両方を結びつけたクロージャといえます。
+
+では、もっと面白い例を見てみましょう。
+[source,perl6]
+----
+sub greeting-generator($period) {
+  return sub ($name) {
+    return "Good $period $name"
+  }
+}
+my $morning = greeting-generator("Morning");
+my $evening = greeting-generator("Evening");
+
+say $morning("John");
+say $evening("Jane");
+----
+この例では、`$period` というひとつの引数を受け取って新しいサブルーチンを返すような、サブルーチン `greeting-generator($period)` を定義しました。このサブルーチンが返す新しいサブルーチンは `$name` という引数を受け取り、そして作成されたあいさつを返します。
+
+基本的に、`greeting-generator` はサブルーチンのファクトリです。この例では、我々は `greeting-generator` を二つの新しいサブルーチンを生成するために用いました。
+ひとつは `Good Morning` とあいさつし、もうひとつは `Good Evening` とあいさつします。
+
+`$morning` と `$evening` は両方ともクロージャです。同じサブルーチン本体の定義を共有していますが、違う環境を保存しています。 +
+`$morning` の環境では `$period` は `Morning` です。
+`$evening` の環境では `$period` は `Evening` です。
+
 == クラスとオブジェクト
 前章では、どうやってPerl6が関数型プログラミングを楽にしてくれるかについて学びました。 +
 この章ではPerl6におけるオブジェクト指向プログラミングについてみていきましょう。
@@ -1657,10 +1717,10 @@ _オブジェクト指向_ の用語では、これらのオブジェクトは�
 [source,perl6]
 ----
 class Human {
-  has $name;
-  has $age;
-  has $sex;
-  has $nationality;
+  has $.name;
+  has $.age;
+  has $.sex;
+  has $.nationality;
 }
 
 my $john = Human.new(name => 'John', age => 23, sex => 'M', nationality => 'American');
@@ -1733,7 +1793,7 @@ say $john;
 
 では、`has $!age` を `has $.age` に置き換えて、`say $john.age;` の結果を見てみましょう。
 
-=== 名前付き引数と固定引数
+=== 名前付き引数と固定パラメータ
 Perl6では、すべてのクラスはデフォルトの `.new()` コンストラクタを継承しています。 +
 このコンストラクタは引数を与えてオブジェクトを生成することもできます。 +
 デフォルトのコンストラクタは *名前付き引数* のみ使用することができます。 +
@@ -2512,12 +2572,12 @@ if 'ac' ~~ m/ a.c / {
 ----
 if 'ac' ~~ m/ a?c / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 if 'c' ~~ m/ a?c / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 ----
@@ -2528,22 +2588,22 @@ if 'c' ~~ m/ a?c / {
 ----
 if 'az' ~~ m/ a*z / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 if 'aaz' ~~ m/ a*z / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 if 'aaaaaaaaaaz' ~~ m/ a*z / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 if 'z' ~~ m/ a*z / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 ----
@@ -2554,22 +2614,22 @@ if 'z' ~~ m/ a*z / {
 ----
 if 'az' ~~ m/ a+z / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 if 'aaz' ~~ m/ a+z / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 if 'aaaaaaaaaaz' ~~ m/ a+z / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 if 'z' ~~ m/ a+z / {
     say "Match";
-  } else {
+} else {
     say "No Match";
 }
 ----
@@ -2691,11 +2751,11 @@ Perl6は汎用プログラミング言語です。下記を含む多数のタス
 
 Perl6はでは *モジュール* の作成と再配布ができます。それぞれのモジュールはインストールされれば再利用できる機能のパッケージです。
 
-_Panda_ はRakudo Starに付属しているモジュール管理ツールです。
+_Zef_ はRakudo Starに付属しているモジュール管理ツールです。
 
 特定のモジュールをインストールするには、次のコマンドをターミナルで打ってください:
 
-`panda install "モジュールの名前"`
+`zef install "モジュールの名前"`
 
 NOTE: Perl6のモジュールの一覧を見るには次のURLを参照してください: https://modules.perl6.org/
 
@@ -2708,7 +2768,7 @@ MD5による、データベースに格納されているパスワードの暗�
 DBにパスワードを格納するのに備えて、そのパスワードのMD5ハッシュを生成するスクリプトが必要だとしましょう。
 
 幸運なことに、MD5アルゴリズムを実装したPerl6モジュールがすでにあります。インストールしましょう: +
-`panda install Digest::MD5`
+`zef install Digest::MD5`
 
 では、次のスクリプトを実行してください:
 [source,perl6]
@@ -2857,7 +2917,7 @@ say now - INIT now;                             # スクリプトの処理が完
 ----
 my @array = (1..1000);
 my @result = @array.race.map( {$_ + 1} );
-@result>>.say;
+.say for @result;
 ----
 
 [source,perl6]
@@ -2865,7 +2925,7 @@ my @result = @array.race.map( {$_ + 1} );
 ----
 my @array = (1..1000);
 my @result = @array.hyper.map( {$_ + 1} );
-@result>>.say;
+.say for @result;
 ----
 
 もし両方の例を実行したなら、片方はソートされていてもう片方はソートされていないことに気づいたはずです。
@@ -2918,11 +2978,11 @@ say now - INIT now;
 ----
 
 .説明
-`start` メソッドはコードを評価し、`Promise型のオブジェクト` (端的には `約束` )を返します。 +
+`start` サブルーチンはコードを評価し、`Promise型のオブジェクト` (端的には `約束` )を返します。 +
 もしコードが正しく評価されたのなら _約束_ は *守られ* ているでしょう。 +
 もしコードが例外を投げたのなら _約束_ は *破られ* ているでしょう。
 
-`await` メソッドは *約束* を待ちます。 +
+`await` サブルーチンは *約束* を待ちます。 +
 もし約束が *守られた* なら返された値を取得するでしょう。 +
 もし約束が *破られた* なら投げられた例外を取得するでしょう。
 
@@ -2937,6 +2997,8 @@ NOTE: 並行/非同期プログラミングについてもっと情報を知り�
 == コミュニティ
 
 * link:irc://irc.freenode.net/#perl6[#perl6] IRCチャンネルです。活発な議論が行われています。何でも気軽に質問してください: https://perl6.org/community/irc
+
+* link:https://p6weekly.wordpress.com[p6weekly] Perl6とその周辺の出来事について今週のダイジェストをお伝えします。
 
 * link:http://pl6anet.org[pl6anet] Perl6のブログを集約しています。Perl6にフォーカスしたブログ記事にこうご期待ください。
 
